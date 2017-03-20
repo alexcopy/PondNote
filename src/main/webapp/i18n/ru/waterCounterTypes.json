@@ -1,0 +1,10 @@
+{
+    "pondNotesApp": {
+        "WaterCounterTypes" : {
+            "null": "",
+            "PondId": "PondId",
+            "PondId1": "PondId1",
+            "PondId3": "PondId3"
+        }
+    }
+}
