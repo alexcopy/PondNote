@@ -1,0 +1,23 @@
+{
+    "pondNotesApp": {
+        "unitId" : {
+            "home": {
+                "title": "Unit Ids",
+                "createLabel": "Create a new Unit Id",
+                "createOrEditLabel": "Create or edit a Unit Id",
+                "search": "Search for Unit Id"
+            },
+            "created": "A new Unit Id is created with identifier {{ param }}",
+            "updated": "A Unit Id is updated with identifier {{ param }}",
+            "deleted": "A Unit Id is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Unit Id {{ id }}?"
+            },
+            "detail": {
+                "title": "Unit Id"
+            },
+            "unitId": "Unit Id",
+            "description": "Description"
+        }
+    }
+}

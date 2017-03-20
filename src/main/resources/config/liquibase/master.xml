@@ -8,6 +8,7 @@
     <include file="classpath:config/liquibase/changelog/20170320221752_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170320224954_added_entity_WaterCounter.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170320233110_added_entity_DataTemp.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170320233506_added_entity_UnitId.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
