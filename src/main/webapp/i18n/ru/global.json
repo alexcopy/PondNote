@@ -8,6 +8,7 @@
             "entities": {
                 "main": "Сущности",
                 "waterCounter": "Water Counter",
+                "dataTemp": "Data Temp",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
