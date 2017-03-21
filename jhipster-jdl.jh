@@ -1,12 +1,14 @@
-entity DeviceType {
-	name String required,
-    type String required,
+
+
+entity Device {
+	deviceName String required,
+    deviceType String required,
     description String required,
     timestamp Integer required
 }
 
 entity TempMeter {
-	value Double required,
+	tempValue Double required,
     timestamp Integer required
 }
  
@@ -25,23 +27,19 @@ entity MeterReading {
 }
 
 
-enum Language {
-     ENGLISH, RUSSIAN
-}
-
 relationship OneToMany {
-    //DeviceType{deviceId} to FilterPumpCleaning,
-    DeviceType{name} to MeterReading 
+   // Device{deviceName} to FilterPumpCleaning,
+    Device{deviceName} to MeterReading 
 }
  
 
-relationship OneToOne {
+//relationship OneToOne {
   // TempMeter{tempVal} to MeterReading,
-    TempMeter{value} to FilterPumpCleaning
-}
+ //   TempMeter{tempValue} to FilterPumpCleaning
+//}
 
 // Set pagination options
-paginate DeviceType, TempMeter with infinite-scroll
+paginate Device, TempMeter with infinite-scroll
 paginate MeterReading with pagination
 paginate FilterPumpCleaning with pagination
 
