@@ -1,7 +1,0 @@
-entity DeviceType {
-    deviceId String required,
-    type String,
-    description String,
-    createdAt  Integer
-}
-
