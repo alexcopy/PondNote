@@ -7,9 +7,6 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
-                "waterCounter": "Water Counter",
-                "dataTemp": "Data Temp",
-                "unitId": "Unit Id",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -32,7 +29,6 @@
                 "audits": "Audits",
                 "apidocs": "API",
                 "database": "Database",
-                "entity-audit": "Entity Audit",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
             "language": "Language"

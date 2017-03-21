@@ -28,24 +28,6 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li uiSrefActive="active">
-                        <a class="dropdown-item" routerLink="water-counter" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.waterCounter">Water Counter</span>
-                        </a>
-                    </li>
-                    <li uiSrefActive="active">
-                        <a class="dropdown-item" routerLink="data-temp" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.dataTemp">Data Temp</span>
-                        </a>
-                    </li>
-                    <li uiSrefActive="active">
-                        <a class="dropdown-item" routerLink="unit-id" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.unitId">Unit Id</span>
-                        </a>
-                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
@@ -106,12 +88,6 @@
                             <span jhiTranslate="global.menu.admin.apidocs">API</span>
                         </a>
                     </li>
-                    <li ui-sref-active="active" >
-                            <a ui-sref="entity-audit" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
-                                <span data-translate="global.menu.admin.entity-audit">Entity Audit</span>
-                            </a>
-                        </li>
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                     <li *ngIf="!inProduction">
                         <a class="dropdown-item" href='/h2-console' target="_tab" (click)="collapseNavbar()">

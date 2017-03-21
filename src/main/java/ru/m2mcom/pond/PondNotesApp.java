@@ -36,7 +36,7 @@ public class PondNotesApp {
     }
 
     /**
-     * Initializes pondNotes.
+     * Initializes PondNotes.
      * <p>
      * Spring profiles can be configured with a program arguments --spring.profiles.active=your-active-profile
      * <p>

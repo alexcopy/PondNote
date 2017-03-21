@@ -1,0 +1,51 @@
+entity DeviceType {
+	deviceId String required,
+    deviceType String required,
+    description String required,
+    timestamp Integer required
+}
+
+entity TempMeter {
+	tempVal Double required,
+    timestamp Integer required
+}
+ 
+entity MeterReading {
+	deviceId String,
+	description String,
+	reading Double,
+	tempVal Double
+}
+ 
+ entity FilterPumpCleaning {
+	deviceId String,
+	description String,
+    tempVal Integer,
+    timestamp Integer,
+}
+
+
+enum Language {
+     ENGLISH, RUSSIAN
+}
+
+relationship OneToMany {
+	DeviceType{deviceId} to FilterPumpCleaning,
+    DeviceType{deviceId} to MeterReading 
+}
+ 
+
+relationship OneToOne {
+    TempMeter{tempVal} to MeterReading,
+    TempMeter{tempVal} to FilterPumpCleaning
+}
+
+// Set pagination options
+paginate DeviceType, TempMeter with infinite-scroll
+paginate MeterReading with pagination
+paginate FilterPumpCleaning with pagination
+
+dto * with mapstruct
+
+service all with serviceImpl
+angularSuffix * with pondSuff

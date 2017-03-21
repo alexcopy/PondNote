@@ -16,14 +16,14 @@
 
 spring:
     application:
-        name: pondNotes
+        name: PondNotes
     jackson:
         serialization.write_dates_as_timestamps: false
     cache:
         type: none
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:pondNotes;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:PondNotes;DB_CLOSE_DELAY=-1
         name:
         username:
         password:
@@ -31,7 +31,7 @@ spring:
         database-platform: io.github.jhipster.domain.util.FixedH2Dialect
         database: H2
         open-in-view: false
-        show-sql: true
+        show-sql: false
         hibernate:
             ddl-auto: none
             naming:
@@ -80,13 +80,13 @@ server:
 
 jhipster:
     async:
-        core-pool-size: 2
+        core-pool-size: 1
         max-pool-size: 50
         queue-capacity: 10000
     security:
         authentication:
             jwt:
-                secret: adeb6f9caac697e57563ed6740b79f6f43ce2751
+                secret: a0261689b2ab0dc11a8455ecdc3aafe214b20e90
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration

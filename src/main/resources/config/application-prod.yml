@@ -21,7 +21,7 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mariadb://localhost:3306/pondNotes
+        url: jdbc:mariadb://localhost:3306/PondNotes
         username: root
         password:
         hikari:
@@ -40,7 +40,7 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: false
             hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
-            hibernate.cache.hazelcast.instance_name: pondNotes
+            hibernate.cache.hazelcast.instance_name: PondNotes
             hibernate.cache.use_minimal_puts: true
             hibernate.cache.hazelcast.use_lite_member: true
     data:
@@ -60,7 +60,7 @@ liquibase:
 
 # ===================================================================
 # To enable SSL, generate a certificate using:
-# keytool -genkey -alias pondNotes -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias PondNotes -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
@@ -73,7 +73,7 @@ liquibase:
 #        key-store: keystore.p12
 #        key-store-password: <your-password>
 #        keyStoreType: PKCS12
-#        keyAlias: pondNotes
+#        keyAlias: PondNotes
 # ===================================================================
 server:
     port: 8080
@@ -100,12 +100,12 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: adeb6f9caac697e57563ed6740b79f6f43ce2751
+                secret: a0261689b2ab0dc11a8455ecdc3aafe214b20e90
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: pondNotes@localhost
+        from: PondNotes@localhost
         base-url: http://my-server-url-to-change # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
@@ -113,13 +113,13 @@ jhipster:
             enabled: false
             host: localhost
             port: 2003
-            prefix: pondNotes
+            prefix: PondNotes
         prometheus:
             enabled: false
             endpoint: /prometheusMetrics
         logs: # Reports Dropwizard metrics in the logs
             enabled: false
-            reportFrequency: 60 # in seconds
+            report-frequency: 60 # in seconds
     logging:
         logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
             enabled: false

@@ -1,7 +1,11 @@
 {
   "generator-jhipster": {
-    "jhipsterVersion": "4.0.8",
-    "baseName": "pondNotes",
+    "promptValues": {
+      "packageName": "ru.m2mcom.pond",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "4.1.0",
+    "baseName": "PondNotes",
     "packageName": "ru.m2mcom.pond",
     "packageFolder": "ru/m2mcom/pond",
     "serverPort": "8080",
@@ -17,7 +21,7 @@
     "serviceDiscoveryType": false,
     "buildTool": "maven",
     "enableSocialSignIn": true,
-    "jwtSecretKey": "adeb6f9caac697e57563ed6740b79f6f43ce2751",
+    "jwtSecretKey": "a0261689b2ab0dc11a8455ecdc3aafe214b20e90",
     "clientFramework": "angular2",
     "useSass": false,
     "clientPackageManager": "yarn",
@@ -32,8 +36,5 @@
       "en",
       "ru"
     ]
-  },
-  "generator-jhipster-entity-audit": {
-    "auditFramework": "custom"
   }
 }

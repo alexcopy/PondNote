@@ -55,7 +55,7 @@ public class CacheConfiguration {
     public HazelcastInstance hazelcastInstance(JHipsterProperties jHipsterProperties) {
         log.debug("Configuring Hazelcast");
         Config config = new Config();
-        config.setInstanceName("pondNotes");
+        config.setInstanceName("PondNotes");
         config.getNetworkConfig().setPort(5701);
         config.getNetworkConfig().setPortAutoIncrement(true);
 
