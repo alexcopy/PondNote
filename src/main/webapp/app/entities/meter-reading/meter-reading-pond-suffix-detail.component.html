@@ -1,0 +1,43 @@
+
+<div *ngIf="meterReading">
+    <h2><span jhiTranslate="pondNotesApp.meterReading.detail.title">Meter Reading</span> {{meterReading.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.meterReading.readingDate">Reading Date</span></dt>
+        <dd>
+            <span>{{meterReading.readingDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.meterReading.description">Description</span></dt>
+        <dd>
+            <span>{{meterReading.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.meterReading.reading">Reading</span></dt>
+        <dd>
+            <span>{{meterReading.reading}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.meterReading.tempVal">Temp Val</span></dt>
+        <dd>
+            <span>{{meterReading.tempVal}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.meterReading.device">Device</span></dt>
+        <dd>
+            <div *ngIf="meterReading.deviceId">
+                <a [routerLink]="['/device-pond-suffix', meterReading.deviceId]">{{meterReading.deviceDeviceName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'meter-reading-pond-suffix/'+ meterReading.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

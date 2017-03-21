@@ -28,6 +28,30 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li uiSrefActive="active">
+                        <a class="dropdown-item" routerLink="device-pond-suffix" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.devicePondSuffix">Device Pond Suffix</span>
+                        </a>
+                    </li>
+                    <li uiSrefActive="active">
+                        <a class="dropdown-item" routerLink="filter-pump-cleaning-pond-suffix" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.filterPumpCleaningPondSuffix">Filter Pump Cleaning Pond Suffix</span>
+                        </a>
+                    </li>
+                    <li uiSrefActive="active">
+                        <a class="dropdown-item" routerLink="meter-reading-pond-suffix" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.meterReadingPondSuffix">Meter Reading Pond Suffix</span>
+                        </a>
+                    </li>
+                    <li uiSrefActive="active">
+                        <a class="dropdown-item" routerLink="temp-meter-pond-suffix" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.tempMeterPondSuffix">Temp Meter Pond Suffix</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

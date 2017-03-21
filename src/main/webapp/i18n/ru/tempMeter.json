@@ -1,0 +1,23 @@
+{
+    "pondNotesApp": {
+        "tempMeter" : {
+            "home": {
+                "title": "Temp Meters",
+                "createLabel": "Создать новый Temp Meter",
+                "createOrEditLabel": "Создать или отредактировать Temp Meter",
+                "search": "Найти Temp Meter"
+            },
+            "created": "Новый Temp Meter создан с идентификатором {{ param }}",
+            "updated": "Temp Meter обновлен с идентификатором {{ param }}",
+            "deleted": "Temp Meter удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Temp Meter {{ id }}?"
+            },
+            "detail": {
+                "title": "Temp Meter"
+            },
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp"
+        }
+    }
+}

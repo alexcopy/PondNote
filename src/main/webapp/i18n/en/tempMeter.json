@@ -1,0 +1,23 @@
+{
+    "pondNotesApp": {
+        "tempMeter" : {
+            "home": {
+                "title": "Temp Meters",
+                "createLabel": "Create a new Temp Meter",
+                "createOrEditLabel": "Create or edit a Temp Meter",
+                "search": "Search for Temp Meter"
+            },
+            "created": "A new Temp Meter is created with identifier {{ param }}",
+            "updated": "A Temp Meter is updated with identifier {{ param }}",
+            "deleted": "A Temp Meter is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Temp Meter {{ id }}?"
+            },
+            "detail": {
+                "title": "Temp Meter"
+            },
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp"
+        }
+    }
+}

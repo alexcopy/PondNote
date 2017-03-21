@@ -1,0 +1,37 @@
+
+<div *ngIf="device">
+    <h2><span jhiTranslate="pondNotesApp.device.detail.title">Device</span> {{device.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.device.deviceName">Device Name</span></dt>
+        <dd>
+            <span>{{device.deviceName}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.device.deviceType">Device Type</span></dt>
+        <dd>
+            <span>{{device.deviceType}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.device.description">Description</span></dt>
+        <dd>
+            <span>{{device.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.device.timestamp">Timestamp</span></dt>
+        <dd>
+            <span>{{device.timestamp}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'device-pond-suffix/'+ device.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

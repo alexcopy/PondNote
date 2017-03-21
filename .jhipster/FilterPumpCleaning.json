@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "device",
+            "otherEntityName": "device",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "cleaningDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tempVal",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "timestamp",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20170321172901",
+    "entityTableName": "filter_pump_cleaning",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "angularJSSuffix": "pondSuffix"
+}

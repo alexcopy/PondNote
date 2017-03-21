@@ -1,0 +1,62 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myMeterReadingLabel" jhiTranslate="pondNotesApp.meterReading.home.createOrEditLabel">Create or edit a Meter Reading</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!meterReading.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="meterReading.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.meterReading.readingDate" for="field_readingDate">Reading Date</label>
+            <div class="input-group">
+                <input id="field_readingDate" type="text" class="form-control" name="readingDate" ngbDatepicker  #readingDateDp="ngbDatepicker" [(ngModel)]="meterReading.readingDate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="readingDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.meterReading.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="meterReading.description"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.meterReading.reading" for="field_reading">Reading</label>
+            <input type="number" class="form-control" name="reading" id="field_reading"
+                [(ngModel)]="meterReading.reading"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.meterReading.tempVal" for="field_tempVal">Temp Val</label>
+            <input type="number" class="form-control" name="tempVal" id="field_tempVal"
+                [(ngModel)]="meterReading.tempVal"
+             />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="pondNotesApp.meterReading.device" for="field_device">Device</label>
+            <select class="form-control" id="field_device" name="device" [(ngModel)]="meterReading.deviceId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="deviceOption.id" *ngFor="let deviceOption of devices; trackBy: trackDeviceById">{{deviceOption.deviceName}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

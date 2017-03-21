@@ -1,0 +1,26 @@
+{
+    "pondNotesApp": {
+        "meterReading" : {
+            "home": {
+                "title": "Meter Readings",
+                "createLabel": "Создать новый Meter Reading",
+                "createOrEditLabel": "Создать или отредактировать Meter Reading",
+                "search": "Найти Meter Reading"
+            },
+            "created": "Новый Meter Reading создан с идентификатором {{ param }}",
+            "updated": "Meter Reading обновлен с идентификатором {{ param }}",
+            "deleted": "Meter Reading удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Meter Reading {{ id }}?"
+            },
+            "detail": {
+                "title": "Meter Reading"
+            },
+            "readingDate": "Reading Date",
+            "description": "Description",
+            "reading": "Reading",
+            "tempVal": "Temp Val",
+            "device": "Device"
+        }
+    }
+}

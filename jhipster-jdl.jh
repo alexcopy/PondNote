@@ -1,5 +1,3 @@
-
-
 entity Device {
 	deviceName String required,
     deviceType String required,
@@ -8,36 +6,30 @@ entity Device {
 }
 
 entity TempMeter {
-	tempValue Double required,
+	tempVal   Double required,
     timestamp Integer required
 }
  
 entity MeterReading {
-	deviceName String,
+	readingDate LocalDate,
 	description String,
 	reading Double,
 	tempVal Double
 }
  
  entity FilterPumpCleaning {
-	deviceName String,
+	cleaningDate LocalDate,
 	description String,
     tempVal Double,
     timestamp Integer,
 }
 
 
-relationship OneToMany {
-   // Device{deviceName} to FilterPumpCleaning,
-    Device{deviceName} to MeterReading 
+relationship ManyToOne {
+   FilterPumpCleaning{device} to Device,
+   MeterReading {device(deviceName)} to Device
 }
  
-
-//relationship OneToOne {
-  // TempMeter{tempVal} to MeterReading,
- //   TempMeter{tempValue} to FilterPumpCleaning
-//}
-
 // Set pagination options
 paginate Device, TempMeter with infinite-scroll
 paginate MeterReading with pagination

@@ -1,0 +1,26 @@
+{
+    "pondNotesApp": {
+        "filterPumpCleaning" : {
+            "home": {
+                "title": "Filter Pump Cleanings",
+                "createLabel": "Create a new Filter Pump Cleaning",
+                "createOrEditLabel": "Create or edit a Filter Pump Cleaning",
+                "search": "Search for Filter Pump Cleaning"
+            },
+            "created": "A new Filter Pump Cleaning is created with identifier {{ param }}",
+            "updated": "A Filter Pump Cleaning is updated with identifier {{ param }}",
+            "deleted": "A Filter Pump Cleaning is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Filter Pump Cleaning {{ id }}?"
+            },
+            "detail": {
+                "title": "Filter Pump Cleaning"
+            },
+            "cleaningDate": "Cleaning Date",
+            "description": "Description",
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp",
+            "device": "Device"
+        }
+    }
+}

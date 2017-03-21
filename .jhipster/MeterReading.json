@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "device",
+            "otherEntityName": "device",
+            "otherEntityField": "deviceName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "readingDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reading",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "tempVal",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20170321172901",
+    "entityTableName": "meter_reading",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "angularJSSuffix": "pondSuffix"
+}

@@ -1,0 +1,43 @@
+
+<div *ngIf="filterPumpCleaning">
+    <h2><span jhiTranslate="pondNotesApp.filterPumpCleaning.detail.title">Filter Pump Cleaning</span> {{filterPumpCleaning.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.filterPumpCleaning.cleaningDate">Cleaning Date</span></dt>
+        <dd>
+            <span>{{filterPumpCleaning.cleaningDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.filterPumpCleaning.description">Description</span></dt>
+        <dd>
+            <span>{{filterPumpCleaning.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.filterPumpCleaning.tempVal">Temp Val</span></dt>
+        <dd>
+            <span>{{filterPumpCleaning.tempVal}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.filterPumpCleaning.timestamp">Timestamp</span></dt>
+        <dd>
+            <span>{{filterPumpCleaning.timestamp}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.filterPumpCleaning.device">Device</span></dt>
+        <dd>
+            <div *ngIf="filterPumpCleaning.deviceId">
+                <a [routerLink]="['/device-pond-suffix', filterPumpCleaning.deviceId]">{{filterPumpCleaning.deviceId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'filter-pump-cleaning-pond-suffix/'+ filterPumpCleaning.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,26 @@
+{
+    "pondNotesApp": {
+        "filterPumpCleaning" : {
+            "home": {
+                "title": "Filter Pump Cleanings",
+                "createLabel": "Создать новый Filter Pump Cleaning",
+                "createOrEditLabel": "Создать или отредактировать Filter Pump Cleaning",
+                "search": "Найти Filter Pump Cleaning"
+            },
+            "created": "Новый Filter Pump Cleaning создан с идентификатором {{ param }}",
+            "updated": "Filter Pump Cleaning обновлен с идентификатором {{ param }}",
+            "deleted": "Filter Pump Cleaning удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Filter Pump Cleaning {{ id }}?"
+            },
+            "detail": {
+                "title": "Filter Pump Cleaning"
+            },
+            "cleaningDate": "Cleaning Date",
+            "description": "Description",
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp",
+            "device": "Device"
+        }
+    }
+}
