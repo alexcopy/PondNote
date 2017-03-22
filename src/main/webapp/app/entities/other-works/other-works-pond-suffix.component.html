@@ -43,7 +43,7 @@
             <tbody>
             <tr *ngFor="let otherWorks of otherWorks ;trackBy: trackId">
                 <td><a [routerLink]="['../other-works-pond-suffix', otherWorks.id ]">{{otherWorks.id}}</a></td>
-                <td>{{otherWorks.date | date:'mediumDate'}}</td>
+                <td>{{otherWorks.date | date:'medium'}}</td>
                 <td>{{otherWorks.reason}}</td>
                 <td>{{otherWorks.qty}}</td>
                 <td>{{otherWorks.descripton}}</td>

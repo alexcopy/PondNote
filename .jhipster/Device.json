@@ -18,7 +18,8 @@
         },
         {
             "fieldName": "deviceType",
-            "fieldType": "String",
+            "fieldType": "DeviceType",
+            "fieldValues": "PUMP,FILTER,UVLAMP,UVCLARIFIER,AIRPUMP,OTHER",
             "fieldValidateRules": [
                 "required"
             ]

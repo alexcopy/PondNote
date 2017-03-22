@@ -18,7 +18,7 @@ export class TankPondSuffixDetailComponent implements OnInit, OnDestroy {
         private tankService: TankPondSuffixService,
         private route: ActivatedRoute
     ) {
-        this.jhiLanguageService.setLocations(['tank']);
+        this.jhiLanguageService.setLocations(['tank', 'tankType']);
     }
 
     ngOnInit() {

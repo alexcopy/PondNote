@@ -1,12 +1,14 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { FilterPumpCleaningPondSuffix } from './filter-pump-cleaning-pond-suffix.model';
 import { FilterPumpCleaningPondSuffixService } from './filter-pump-cleaning-pond-suffix.service';
 @Injectable()
 export class FilterPumpCleaningPondSuffixPopupService {
     private isOpen = false;
     constructor (
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private filterPumpCleaningService: FilterPumpCleaningPondSuffixService
@@ -21,13 +23,8 @@ export class FilterPumpCleaningPondSuffixPopupService {
 
         if (id) {
             this.filterPumpCleaningService.find(id).subscribe(filterPumpCleaning => {
-                if (filterPumpCleaning.cleaningDate) {
-                    filterPumpCleaning.cleaningDate = {
-                        year: filterPumpCleaning.cleaningDate.getFullYear(),
-                        month: filterPumpCleaning.cleaningDate.getMonth() + 1,
-                        day: filterPumpCleaning.cleaningDate.getDate()
-                    };
-                }
+                filterPumpCleaning.cleaningDate = this.datePipe
+                    .transform(filterPumpCleaning.cleaningDate, 'yyyy-MM-ddThh:mm');
                 this.filterPumpCleaningModalRef(component, filterPumpCleaning);
             });
         } else {

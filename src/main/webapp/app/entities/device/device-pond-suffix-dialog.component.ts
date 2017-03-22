@@ -29,7 +29,7 @@ export class DevicePondSuffixDialogComponent implements OnInit {
         private tankService: TankPondSuffixService,
         private eventManager: EventManager
     ) {
-        this.jhiLanguageService.setLocations(['device']);
+        this.jhiLanguageService.setLocations(['device', 'deviceType']);
     }
 
     ngOnInit() {

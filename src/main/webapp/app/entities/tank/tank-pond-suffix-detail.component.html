@@ -10,19 +10,21 @@
         </dd>
         <dt><span jhiTranslate="pondNotesApp.tank.tankType">Tank Type</span></dt>
         <dd>
-            <span>{{tank.tankType}}</span>
+            <span jhiTranslate="{{'pondNotesApp.TankType.' + tank.tankType}}">{{tank.tankType}}</span>
         </dd>
         <dt><span jhiTranslate="pondNotesApp.tank.description">Description</span></dt>
         <dd>
             <span>{{tank.description}}</span>
         </dd>
-        <dt><span jhiTranslate="pondNotesApp.tank.location">Location</span></dt>
-        <dd>
-            <span>{{tank.location}}</span>
-        </dd>
         <dt><span jhiTranslate="pondNotesApp.tank.timestamp">Timestamp</span></dt>
         <dd>
             <span>{{tank.timestamp}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.tank.location">Location</span></dt>
+        <dd>
+            <div *ngIf="tank.locationId">
+                <a [routerLink]="['/location-pond-suffix', tank.locationId]">{{tank.locationStreetAddress}}</a>
+            </div>
         </dd>
     </dl>
 

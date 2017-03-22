@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import ru.m2mcom.pond.domain.enumeration.TankType;
+
 /**
  * A Tank.
  */
@@ -29,18 +31,20 @@ public class Tank implements Serializable {
     private String tankName;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "tank_type", nullable = false)
-    private String tankType;
+    private TankType tankType;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "location")
-    private String location;
-
     @NotNull
     @Column(name = "timestamp", nullable = false)
     private Integer timestamp;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Location location;
 
     public Long getId() {
         return id;
@@ -63,16 +67,16 @@ public class Tank implements Serializable {
         this.tankName = tankName;
     }
 
-    public String getTankType() {
+    public TankType getTankType() {
         return tankType;
     }
 
-    public Tank tankType(String tankType) {
+    public Tank tankType(TankType tankType) {
         this.tankType = tankType;
         return this;
     }
 
-    public void setTankType(String tankType) {
+    public void setTankType(TankType tankType) {
         this.tankType = tankType;
     }
 
@@ -89,19 +93,6 @@ public class Tank implements Serializable {
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public Tank location(String location) {
-        this.location = location;
-        return this;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public Integer getTimestamp() {
         return timestamp;
     }
@@ -113,6 +104,19 @@ public class Tank implements Serializable {
 
     public void setTimestamp(Integer timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public Tank location(Location location) {
+        this.location = location;
+        return this;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     @Override
@@ -142,7 +146,6 @@ public class Tank implements Serializable {
             ", tankName='" + tankName + "'" +
             ", tankType='" + tankType + "'" +
             ", description='" + description + "'" +
-            ", location='" + location + "'" +
             ", timestamp='" + timestamp + "'" +
             '}';
     }

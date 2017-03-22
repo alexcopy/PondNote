@@ -1,12 +1,14 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { LiveStockPondSuffix } from './live-stock-pond-suffix.model';
 import { LiveStockPondSuffixService } from './live-stock-pond-suffix.service';
 @Injectable()
 export class LiveStockPondSuffixPopupService {
     private isOpen = false;
     constructor (
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private liveStockService: LiveStockPondSuffixService
@@ -21,13 +23,8 @@ export class LiveStockPondSuffixPopupService {
 
         if (id) {
             this.liveStockService.find(id).subscribe(liveStock => {
-                if (liveStock.date) {
-                    liveStock.date = {
-                        year: liveStock.date.getFullYear(),
-                        month: liveStock.date.getMonth() + 1,
-                        day: liveStock.date.getDate()
-                    };
-                }
+                liveStock.date = this.datePipe
+                    .transform(liveStock.date, 'yyyy-MM-ddThh:mm');
                 this.liveStockModalRef(component, liveStock);
             });
         } else {

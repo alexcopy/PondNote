@@ -25,10 +25,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.util.List;
 
+import static ru.m2mcom.pond.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -43,8 +46,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PondNotesApp.class)
 public class FilterPumpCleaningResourceIntTest {
 
-    private static final LocalDate DEFAULT_CLEANING_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CLEANING_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_CLEANING_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_CLEANING_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -209,7 +212,7 @@ public class FilterPumpCleaningResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(filterPumpCleaning.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cleaningDate").value(hasItem(DEFAULT_CLEANING_DATE.toString())))
+            .andExpect(jsonPath("$.[*].cleaningDate").value(hasItem(sameInstant(DEFAULT_CLEANING_DATE))))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].tempVal").value(hasItem(DEFAULT_TEMP_VAL.doubleValue())))
             .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));
@@ -226,7 +229,7 @@ public class FilterPumpCleaningResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(filterPumpCleaning.getId().intValue()))
-            .andExpect(jsonPath("$.cleaningDate").value(DEFAULT_CLEANING_DATE.toString()))
+            .andExpect(jsonPath("$.cleaningDate").value(sameInstant(DEFAULT_CLEANING_DATE)))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.tempVal").value(DEFAULT_TEMP_VAL.doubleValue()))
             .andExpect(jsonPath("$.timestamp").value(DEFAULT_TIMESTAMP));
@@ -329,7 +332,7 @@ public class FilterPumpCleaningResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(filterPumpCleaning.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cleaningDate").value(hasItem(DEFAULT_CLEANING_DATE.toString())))
+            .andExpect(jsonPath("$.[*].cleaningDate").value(hasItem(sameInstant(DEFAULT_CLEANING_DATE))))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].tempVal").value(hasItem(DEFAULT_TEMP_VAL.doubleValue())))
             .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));

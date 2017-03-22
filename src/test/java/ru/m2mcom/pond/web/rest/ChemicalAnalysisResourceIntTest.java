@@ -25,10 +25,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.util.List;
 
+import static ru.m2mcom.pond.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -43,17 +46,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PondNotesApp.class)
 public class ChemicalAnalysisResourceIntTest {
 
-    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final String DEFAULT_NO_2 = "AAAAAAAAAA";
-    private static final String UPDATED_NO_2 = "BBBBBBBBBB";
+    private static final String DEFAULT_N_O_2 = "AAAAAAAAAA";
+    private static final String UPDATED_N_O_2 = "BBBBBBBBBB";
 
-    private static final String DEFAULT_NO_3 = "AAAAAAAAAA";
-    private static final String UPDATED_NO_3 = "BBBBBBBBBB";
+    private static final String DEFAULT_N_O_3 = "AAAAAAAAAA";
+    private static final String UPDATED_N_O_3 = "BBBBBBBBBB";
 
-    private static final String DEFAULT_NH_4 = "AAAAAAAAAA";
-    private static final String UPDATED_NH_4 = "BBBBBBBBBB";
+    private static final String DEFAULT_N_H_4 = "AAAAAAAAAA";
+    private static final String UPDATED_N_H_4 = "BBBBBBBBBB";
 
     private static final String DEFAULT_PH = "AAAAAAAAAA";
     private static final String UPDATED_PH = "BBBBBBBBBB";
@@ -111,9 +114,9 @@ public class ChemicalAnalysisResourceIntTest {
     public static ChemicalAnalysis createEntity(EntityManager em) {
         ChemicalAnalysis chemicalAnalysis = new ChemicalAnalysis()
             .date(DEFAULT_DATE)
-            .no2(DEFAULT_NO_2)
-            .no3(DEFAULT_NO_3)
-            .nh4(DEFAULT_NH_4)
+            .nO2(DEFAULT_N_O_2)
+            .nO3(DEFAULT_N_O_3)
+            .nH4(DEFAULT_N_H_4)
             .ph(DEFAULT_PH)
             .tempVal(DEFAULT_TEMP_VAL)
             .timestamp(DEFAULT_TIMESTAMP);
@@ -143,9 +146,9 @@ public class ChemicalAnalysisResourceIntTest {
         assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeCreate + 1);
         ChemicalAnalysis testChemicalAnalysis = chemicalAnalysisList.get(chemicalAnalysisList.size() - 1);
         assertThat(testChemicalAnalysis.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testChemicalAnalysis.getNo2()).isEqualTo(DEFAULT_NO_2);
-        assertThat(testChemicalAnalysis.getNo3()).isEqualTo(DEFAULT_NO_3);
-        assertThat(testChemicalAnalysis.getNh4()).isEqualTo(DEFAULT_NH_4);
+        assertThat(testChemicalAnalysis.getnO2()).isEqualTo(DEFAULT_N_O_2);
+        assertThat(testChemicalAnalysis.getnO3()).isEqualTo(DEFAULT_N_O_3);
+        assertThat(testChemicalAnalysis.getnH4()).isEqualTo(DEFAULT_N_H_4);
         assertThat(testChemicalAnalysis.getPh()).isEqualTo(DEFAULT_PH);
         assertThat(testChemicalAnalysis.getTempVal()).isEqualTo(DEFAULT_TEMP_VAL);
         assertThat(testChemicalAnalysis.getTimestamp()).isEqualTo(DEFAULT_TIMESTAMP);
@@ -224,10 +227,10 @@ public class ChemicalAnalysisResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(chemicalAnalysis.getId().intValue())))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].no2").value(hasItem(DEFAULT_NO_2.toString())))
-            .andExpect(jsonPath("$.[*].no3").value(hasItem(DEFAULT_NO_3.toString())))
-            .andExpect(jsonPath("$.[*].nh4").value(hasItem(DEFAULT_NH_4.toString())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))))
+            .andExpect(jsonPath("$.[*].nO2").value(hasItem(DEFAULT_N_O_2.toString())))
+            .andExpect(jsonPath("$.[*].nO3").value(hasItem(DEFAULT_N_O_3.toString())))
+            .andExpect(jsonPath("$.[*].nH4").value(hasItem(DEFAULT_N_H_4.toString())))
             .andExpect(jsonPath("$.[*].ph").value(hasItem(DEFAULT_PH.toString())))
             .andExpect(jsonPath("$.[*].tempVal").value(hasItem(DEFAULT_TEMP_VAL.doubleValue())))
             .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));
@@ -244,10 +247,10 @@ public class ChemicalAnalysisResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(chemicalAnalysis.getId().intValue()))
-            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.no2").value(DEFAULT_NO_2.toString()))
-            .andExpect(jsonPath("$.no3").value(DEFAULT_NO_3.toString()))
-            .andExpect(jsonPath("$.nh4").value(DEFAULT_NH_4.toString()))
+            .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)))
+            .andExpect(jsonPath("$.nO2").value(DEFAULT_N_O_2.toString()))
+            .andExpect(jsonPath("$.nO3").value(DEFAULT_N_O_3.toString()))
+            .andExpect(jsonPath("$.nH4").value(DEFAULT_N_H_4.toString()))
             .andExpect(jsonPath("$.ph").value(DEFAULT_PH.toString()))
             .andExpect(jsonPath("$.tempVal").value(DEFAULT_TEMP_VAL.doubleValue()))
             .andExpect(jsonPath("$.timestamp").value(DEFAULT_TIMESTAMP));
@@ -273,9 +276,9 @@ public class ChemicalAnalysisResourceIntTest {
         ChemicalAnalysis updatedChemicalAnalysis = chemicalAnalysisRepository.findOne(chemicalAnalysis.getId());
         updatedChemicalAnalysis
             .date(UPDATED_DATE)
-            .no2(UPDATED_NO_2)
-            .no3(UPDATED_NO_3)
-            .nh4(UPDATED_NH_4)
+            .nO2(UPDATED_N_O_2)
+            .nO3(UPDATED_N_O_3)
+            .nH4(UPDATED_N_H_4)
             .ph(UPDATED_PH)
             .tempVal(UPDATED_TEMP_VAL)
             .timestamp(UPDATED_TIMESTAMP);
@@ -291,9 +294,9 @@ public class ChemicalAnalysisResourceIntTest {
         assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeUpdate);
         ChemicalAnalysis testChemicalAnalysis = chemicalAnalysisList.get(chemicalAnalysisList.size() - 1);
         assertThat(testChemicalAnalysis.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testChemicalAnalysis.getNo2()).isEqualTo(UPDATED_NO_2);
-        assertThat(testChemicalAnalysis.getNo3()).isEqualTo(UPDATED_NO_3);
-        assertThat(testChemicalAnalysis.getNh4()).isEqualTo(UPDATED_NH_4);
+        assertThat(testChemicalAnalysis.getnO2()).isEqualTo(UPDATED_N_O_2);
+        assertThat(testChemicalAnalysis.getnO3()).isEqualTo(UPDATED_N_O_3);
+        assertThat(testChemicalAnalysis.getnH4()).isEqualTo(UPDATED_N_H_4);
         assertThat(testChemicalAnalysis.getPh()).isEqualTo(UPDATED_PH);
         assertThat(testChemicalAnalysis.getTempVal()).isEqualTo(UPDATED_TEMP_VAL);
         assertThat(testChemicalAnalysis.getTimestamp()).isEqualTo(UPDATED_TIMESTAMP);
@@ -356,10 +359,10 @@ public class ChemicalAnalysisResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(chemicalAnalysis.getId().intValue())))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].no2").value(hasItem(DEFAULT_NO_2.toString())))
-            .andExpect(jsonPath("$.[*].no3").value(hasItem(DEFAULT_NO_3.toString())))
-            .andExpect(jsonPath("$.[*].nh4").value(hasItem(DEFAULT_NH_4.toString())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))))
+            .andExpect(jsonPath("$.[*].nO2").value(hasItem(DEFAULT_N_O_2.toString())))
+            .andExpect(jsonPath("$.[*].nO3").value(hasItem(DEFAULT_N_O_3.toString())))
+            .andExpect(jsonPath("$.[*].nH4").value(hasItem(DEFAULT_N_H_4.toString())))
             .andExpect(jsonPath("$.[*].ph").value(hasItem(DEFAULT_PH.toString())))
             .andExpect(jsonPath("$.[*].tempVal").value(hasItem(DEFAULT_TEMP_VAL.doubleValue())))
             .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));

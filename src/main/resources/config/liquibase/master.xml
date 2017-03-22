@@ -15,6 +15,7 @@
     <include file="classpath:config/liquibase/changelog/20170322001017_added_entity_OtherWorks.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170322001017_added_entity_Tank.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170322001017_added_entity_WaterChange.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170322091143_added_entity_Location.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20170321172901_added_entity_constraints_FilterPumpCleaning.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170321172901_added_entity_constraints_MeterReading.xml" relativeToChangelogFile="false"/>
@@ -25,5 +26,6 @@
     <include file="classpath:config/liquibase/changelog/20170322001017_added_entity_constraints_LiveStock.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170322001017_added_entity_constraints_OtherWorks.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170322001017_added_entity_constraints_WaterChange.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170322001017_added_entity_constraints_Tank.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

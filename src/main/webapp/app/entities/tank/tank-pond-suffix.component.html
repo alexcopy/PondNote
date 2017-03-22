@@ -33,8 +33,8 @@
             <th><span jhiTranslate="pondNotesApp.tank.tankName">Tank Name</span></th>
             <th><span jhiTranslate="pondNotesApp.tank.tankType">Tank Type</span></th>
             <th><span jhiTranslate="pondNotesApp.tank.description">Description</span></th>
-            <th><span jhiTranslate="pondNotesApp.tank.location">Location</span></th>
             <th><span jhiTranslate="pondNotesApp.tank.timestamp">Timestamp</span></th>
+            <th><span jhiTranslate="pondNotesApp.tank.location">Location</span></th>
             <th></th>
             </tr>
             </thead>
@@ -42,10 +42,14 @@
             <tr *ngFor="let tank of tanks ;trackBy: trackId">
                 <td><a [routerLink]="['../tank-pond-suffix', tank.id ]">{{tank.id}}</a></td>
                 <td>{{tank.tankName}}</td>
-                <td>{{tank.tankType}}</td>
+                <td jhiTranslate="{{'pondNotesApp.TankType.' + tank.tankType}}">{{tank.tankType}}</td>
                 <td>{{tank.description}}</td>
-                <td>{{tank.location}}</td>
                 <td>{{tank.timestamp}}</td>
+                <td>
+                    <div *ngIf="tank.locationId">
+                        <a [routerLink]="['../location-pond-suffix', tank.locationId  ]" >{{tank.locationStreetAddress}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

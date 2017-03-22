@@ -14,8 +14,7 @@ export class TempMeterPondSuffixService {
 
     create(tempMeter: TempMeterPondSuffix): Observable<TempMeterPondSuffix> {
         let copy: TempMeterPondSuffix = Object.assign({}, tempMeter);
-        copy.readingDate = this.dateUtils
-            .convertLocalDateToServer(tempMeter.readingDate);
+        copy.readingDate = this.dateUtils.toDate(tempMeter.readingDate);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -23,8 +22,8 @@ export class TempMeterPondSuffixService {
 
     update(tempMeter: TempMeterPondSuffix): Observable<TempMeterPondSuffix> {
         let copy: TempMeterPondSuffix = Object.assign({}, tempMeter);
-        copy.readingDate = this.dateUtils
-            .convertLocalDateToServer(tempMeter.readingDate);
+
+        copy.readingDate = this.dateUtils.toDate(tempMeter.readingDate);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -34,7 +33,7 @@ export class TempMeterPondSuffixService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             let jsonResponse = res.json();
             jsonResponse.readingDate = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse.readingDate);
+                .convertDateTimeFromServer(jsonResponse.readingDate);
             return jsonResponse;
         });
     }
@@ -61,7 +60,7 @@ export class TempMeterPondSuffixService {
         let jsonResponse = res.json();
         for (let i = 0; i < jsonResponse.length; i++) {
             jsonResponse[i].readingDate = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse[i].readingDate);
+                .convertDateTimeFromServer(jsonResponse[i].readingDate);
         }
         res._body = jsonResponse;
         return res;

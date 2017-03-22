@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import ru.m2mcom.pond.domain.enumeration.DeviceType;
 
 /**
  * A DTO for the Device entity.
@@ -18,7 +19,7 @@ public class DeviceDTO implements Serializable {
     private String deviceName;
 
     @NotNull
-    private String deviceType;
+    private DeviceType deviceType;
 
     @NotNull
     private String description;
@@ -44,11 +45,11 @@ public class DeviceDTO implements Serializable {
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
     }
-    public String getDeviceType() {
+    public DeviceType getDeviceType() {
         return deviceType;
     }
 
-    public void setDeviceType(String deviceType) {
+    public void setDeviceType(DeviceType deviceType) {
         this.deviceType = deviceType;
     }
     public String getDescription() {

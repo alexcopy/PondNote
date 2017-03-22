@@ -1,12 +1,14 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { WaterChangePondSuffix } from './water-change-pond-suffix.model';
 import { WaterChangePondSuffixService } from './water-change-pond-suffix.service';
 @Injectable()
 export class WaterChangePondSuffixPopupService {
     private isOpen = false;
     constructor (
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private waterChangeService: WaterChangePondSuffixService
@@ -21,13 +23,8 @@ export class WaterChangePondSuffixPopupService {
 
         if (id) {
             this.waterChangeService.find(id).subscribe(waterChange => {
-                if (waterChange.changeDate) {
-                    waterChange.changeDate = {
-                        year: waterChange.changeDate.getFullYear(),
-                        month: waterChange.changeDate.getMonth() + 1,
-                        day: waterChange.changeDate.getDate()
-                    };
-                }
+                waterChange.changeDate = this.datePipe
+                    .transform(waterChange.changeDate, 'yyyy-MM-ddThh:mm');
                 this.waterChangeModalRef(component, waterChange);
             });
         } else {

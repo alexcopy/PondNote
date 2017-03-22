@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -27,7 +27,7 @@ public class MeterReading implements Serializable {
 
     @NotNull
     @Column(name = "reading_date", nullable = false)
-    private LocalDate readingDate;
+    private ZonedDateTime readingDate;
 
     @Column(name = "description")
     private String description;
@@ -51,16 +51,16 @@ public class MeterReading implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getReadingDate() {
+    public ZonedDateTime getReadingDate() {
         return readingDate;
     }
 
-    public MeterReading readingDate(LocalDate readingDate) {
+    public MeterReading readingDate(ZonedDateTime readingDate) {
         this.readingDate = readingDate;
         return this;
     }
 
-    public void setReadingDate(LocalDate readingDate) {
+    public void setReadingDate(ZonedDateTime readingDate) {
         this.readingDate = readingDate;
     }
 

@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import ru.m2mcom.pond.domain.enumeration.DeviceType;
 /**
  * Test class for the DeviceResource REST controller.
  *
@@ -44,8 +45,8 @@ public class DeviceResourceIntTest {
     private static final String DEFAULT_DEVICE_NAME = "AAAAAAAAAA";
     private static final String UPDATED_DEVICE_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DEVICE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_DEVICE_TYPE = "BBBBBBBBBB";
+    private static final DeviceType DEFAULT_DEVICE_TYPE = DeviceType.PUMP;
+    private static final DeviceType UPDATED_DEVICE_TYPE = DeviceType.FILTER;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";

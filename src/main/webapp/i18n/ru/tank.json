@@ -19,8 +19,8 @@
             "tankName": "Tank Name",
             "tankType": "Tank Type",
             "description": "Description",
-            "location": "Location",
-            "timestamp": "Timestamp"
+            "timestamp": "Timestamp",
+            "location": "Location"
         }
     }
 }

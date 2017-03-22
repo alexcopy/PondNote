@@ -14,8 +14,7 @@ export class FilterPumpCleaningPondSuffixService {
 
     create(filterPumpCleaning: FilterPumpCleaningPondSuffix): Observable<FilterPumpCleaningPondSuffix> {
         let copy: FilterPumpCleaningPondSuffix = Object.assign({}, filterPumpCleaning);
-        copy.cleaningDate = this.dateUtils
-            .convertLocalDateToServer(filterPumpCleaning.cleaningDate);
+        copy.cleaningDate = this.dateUtils.toDate(filterPumpCleaning.cleaningDate);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -23,8 +22,8 @@ export class FilterPumpCleaningPondSuffixService {
 
     update(filterPumpCleaning: FilterPumpCleaningPondSuffix): Observable<FilterPumpCleaningPondSuffix> {
         let copy: FilterPumpCleaningPondSuffix = Object.assign({}, filterPumpCleaning);
-        copy.cleaningDate = this.dateUtils
-            .convertLocalDateToServer(filterPumpCleaning.cleaningDate);
+
+        copy.cleaningDate = this.dateUtils.toDate(filterPumpCleaning.cleaningDate);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -34,7 +33,7 @@ export class FilterPumpCleaningPondSuffixService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             let jsonResponse = res.json();
             jsonResponse.cleaningDate = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse.cleaningDate);
+                .convertDateTimeFromServer(jsonResponse.cleaningDate);
             return jsonResponse;
         });
     }
@@ -61,7 +60,7 @@ export class FilterPumpCleaningPondSuffixService {
         let jsonResponse = res.json();
         for (let i = 0; i < jsonResponse.length; i++) {
             jsonResponse[i].cleaningDate = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse[i].cleaningDate);
+                .convertDateTimeFromServer(jsonResponse[i].cleaningDate);
         }
         res._body = jsonResponse;
         return res;

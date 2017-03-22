@@ -17,6 +17,7 @@
                 "otherWorksPondSuffix": "Other Works",
                 "tankPondSuffix": "Tank",
                 "waterChangePondSuffix": "Water Change",
+                "locationPondSuffix": "Location",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

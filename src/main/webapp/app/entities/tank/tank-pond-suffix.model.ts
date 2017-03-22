@@ -1,11 +1,17 @@
+
+const enum TankType {
+    'POND',
+    'AQUARIUM'
+
+};
 export class TankPondSuffix {
     constructor(
         public id?: number,
         public tankName?: string,
-        public tankType?: string,
+        public tankType?: TankType,
         public description?: string,
-        public location?: string,
         public timestamp?: number,
+        public locationId?: number,
     ) {
     }
 }

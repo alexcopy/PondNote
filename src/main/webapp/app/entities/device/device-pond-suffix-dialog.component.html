@@ -28,9 +28,14 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="pondNotesApp.device.deviceType" for="field_deviceType">Device Type</label>
-            <input type="text" class="form-control" name="deviceType" id="field_deviceType"
-                [(ngModel)]="device.deviceType"
-            required />
+            <select class="form-control" name="deviceType" [(ngModel)]="device.deviceType" id="field_deviceType"  required>
+                <option value="PUMP" jhiTranslate="pondNotesApp.DeviceType.PUMP">PUMP</option>
+                <option value="FILTER" jhiTranslate="pondNotesApp.DeviceType.FILTER">FILTER</option>
+                <option value="UVLAMP" jhiTranslate="pondNotesApp.DeviceType.UVLAMP">UVLAMP</option>
+                <option value="UVCLARIFIER" jhiTranslate="pondNotesApp.DeviceType.UVCLARIFIER">UVCLARIFIER</option>
+                <option value="AIRPUMP" jhiTranslate="pondNotesApp.DeviceType.AIRPUMP">AIRPUMP</option>
+                <option value="OTHER" jhiTranslate="pondNotesApp.DeviceType.OTHER">OTHER</option>
+            </select>
             <div [hidden]="!(editForm.controls.deviceType?.dirty && editForm.controls.deviceType?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.deviceType?.errors?.required" jhiTranslate="entity.validation.required">

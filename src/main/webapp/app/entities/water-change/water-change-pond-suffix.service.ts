@@ -14,8 +14,7 @@ export class WaterChangePondSuffixService {
 
     create(waterChange: WaterChangePondSuffix): Observable<WaterChangePondSuffix> {
         let copy: WaterChangePondSuffix = Object.assign({}, waterChange);
-        copy.changeDate = this.dateUtils
-            .convertLocalDateToServer(waterChange.changeDate);
+        copy.changeDate = this.dateUtils.toDate(waterChange.changeDate);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -23,8 +22,8 @@ export class WaterChangePondSuffixService {
 
     update(waterChange: WaterChangePondSuffix): Observable<WaterChangePondSuffix> {
         let copy: WaterChangePondSuffix = Object.assign({}, waterChange);
-        copy.changeDate = this.dateUtils
-            .convertLocalDateToServer(waterChange.changeDate);
+
+        copy.changeDate = this.dateUtils.toDate(waterChange.changeDate);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -34,7 +33,7 @@ export class WaterChangePondSuffixService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             let jsonResponse = res.json();
             jsonResponse.changeDate = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse.changeDate);
+                .convertDateTimeFromServer(jsonResponse.changeDate);
             return jsonResponse;
         });
     }
@@ -61,7 +60,7 @@ export class WaterChangePondSuffixService {
         let jsonResponse = res.json();
         for (let i = 0; i < jsonResponse.length; i++) {
             jsonResponse[i].changeDate = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse[i].changeDate);
+                .convertDateTimeFromServer(jsonResponse[i].changeDate);
         }
         res._body = jsonResponse;
         return res;

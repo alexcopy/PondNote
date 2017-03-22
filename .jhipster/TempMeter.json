@@ -13,7 +13,7 @@
     "fields": [
         {
             "fieldName": "readingDate",
-            "fieldType": "LocalDate"
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldName": "tempVal",

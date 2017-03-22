@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -27,7 +27,7 @@ public class OtherWorks implements Serializable {
 
     @NotNull
     @Column(name = "date", nullable = false)
-    private LocalDate date;
+    private ZonedDateTime date;
 
     @Column(name = "reason")
     private String reason;
@@ -56,16 +56,16 @@ public class OtherWorks implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
-    public OtherWorks date(LocalDate date) {
+    public OtherWorks date(ZonedDateTime date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(ZonedDateTime date) {
         this.date = date;
     }
 

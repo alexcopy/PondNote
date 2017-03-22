@@ -22,7 +22,7 @@ export class DevicePondSuffixDeleteDialogComponent {
         public activeModal: NgbActiveModal,
         private eventManager: EventManager
     ) {
-        this.jhiLanguageService.setLocations(['device']);
+        this.jhiLanguageService.setLocations(['device', 'deviceType']);
     }
 
     clear () {

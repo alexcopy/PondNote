@@ -1,6 +1,7 @@
 package ru.m2mcom.pond.service.dto;
 
-import java.time.LocalDate;
+
+import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ public class WaterChangeDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private LocalDate changeDate;
+    private ZonedDateTime changeDate;
 
     private String description;
 
@@ -41,11 +42,11 @@ public class WaterChangeDTO implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    public LocalDate getChangeDate() {
+    public ZonedDateTime getChangeDate() {
         return changeDate;
     }
 
-    public void setChangeDate(LocalDate changeDate) {
+    public void setChangeDate(ZonedDateTime changeDate) {
         this.changeDate = changeDate;
     }
     public String getDescription() {

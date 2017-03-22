@@ -1,12 +1,14 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { OtherWorksPondSuffix } from './other-works-pond-suffix.model';
 import { OtherWorksPondSuffixService } from './other-works-pond-suffix.service';
 @Injectable()
 export class OtherWorksPondSuffixPopupService {
     private isOpen = false;
     constructor (
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private otherWorksService: OtherWorksPondSuffixService
@@ -21,13 +23,8 @@ export class OtherWorksPondSuffixPopupService {
 
         if (id) {
             this.otherWorksService.find(id).subscribe(otherWorks => {
-                if (otherWorks.date) {
-                    otherWorks.date = {
-                        year: otherWorks.date.getFullYear(),
-                        month: otherWorks.date.getMonth() + 1,
-                        day: otherWorks.date.getDate()
-                    };
-                }
+                otherWorks.date = this.datePipe
+                    .transform(otherWorks.date, 'yyyy-MM-ddThh:mm');
                 this.otherWorksModalRef(component, otherWorks);
             });
         } else {

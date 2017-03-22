@@ -45,7 +45,7 @@ export class DevicePondSuffixComponent implements OnInit, OnDestroy {
         this.predicate = 'id';
         this.reverse = true;
         this.currentSearch = activatedRoute.snapshot.params['search'] ? activatedRoute.snapshot.params['search'] : '';
-        this.jhiLanguageService.setLocations(['device']);
+        this.jhiLanguageService.setLocations(['device', 'deviceType']);
     }
 
     loadAll () {

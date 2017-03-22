@@ -10,6 +10,7 @@ import { PondNotesLiveStockPondSuffixModule } from './live-stock/live-stock-pond
 import { PondNotesOtherWorksPondSuffixModule } from './other-works/other-works-pond-suffix.module';
 import { PondNotesTankPondSuffixModule } from './tank/tank-pond-suffix.module';
 import { PondNotesWaterChangePondSuffixModule } from './water-change/water-change-pond-suffix.module';
+import { PondNotesLocationPondSuffixModule } from './location/location-pond-suffix.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PondNotesWaterChangePondSuffixModule } from './water-change/water-chang
         PondNotesOtherWorksPondSuffixModule,
         PondNotesTankPondSuffixModule,
         PondNotesWaterChangePondSuffixModule,
+        PondNotesLocationPondSuffixModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

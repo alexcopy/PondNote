@@ -1,12 +1,14 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { MeterReadingPondSuffix } from './meter-reading-pond-suffix.model';
 import { MeterReadingPondSuffixService } from './meter-reading-pond-suffix.service';
 @Injectable()
 export class MeterReadingPondSuffixPopupService {
     private isOpen = false;
     constructor (
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private meterReadingService: MeterReadingPondSuffixService
@@ -21,13 +23,8 @@ export class MeterReadingPondSuffixPopupService {
 
         if (id) {
             this.meterReadingService.find(id).subscribe(meterReading => {
-                if (meterReading.readingDate) {
-                    meterReading.readingDate = {
-                        year: meterReading.readingDate.getFullYear(),
-                        month: meterReading.readingDate.getMonth() + 1,
-                        day: meterReading.readingDate.getDate()
-                    };
-                }
+                meterReading.readingDate = this.datePipe
+                    .transform(meterReading.readingDate, 'yyyy-MM-ddThh:mm');
                 this.meterReadingModalRef(component, meterReading);
             });
         } else {

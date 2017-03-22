@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import ru.m2mcom.pond.domain.enumeration.DeviceType;
+
 /**
  * A Device.
  */
@@ -29,8 +31,9 @@ public class Device implements Serializable {
     private String deviceName;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "device_type", nullable = false)
-    private String deviceType;
+    private DeviceType deviceType;
 
     @NotNull
     @Column(name = "description", nullable = false)
@@ -64,16 +67,16 @@ public class Device implements Serializable {
         this.deviceName = deviceName;
     }
 
-    public String getDeviceType() {
+    public DeviceType getDeviceType() {
         return deviceType;
     }
 
-    public Device deviceType(String deviceType) {
+    public Device deviceType(DeviceType deviceType) {
         this.deviceType = deviceType;
         return this;
     }
 
-    public void setDeviceType(String deviceType) {
+    public void setDeviceType(DeviceType deviceType) {
         this.deviceType = deviceType;
     }
 

@@ -11,7 +11,7 @@
     "fields": [
         {
             "fieldName": "date",
-            "fieldType": "LocalDate",
+            "fieldType": "ZonedDateTime",
             "fieldValidateRules": [
                 "required"
             ]

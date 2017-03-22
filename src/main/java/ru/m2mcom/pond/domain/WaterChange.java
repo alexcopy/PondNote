@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -27,7 +27,7 @@ public class WaterChange implements Serializable {
 
     @NotNull
     @Column(name = "change_date", nullable = false)
-    private LocalDate changeDate;
+    private ZonedDateTime changeDate;
 
     @Column(name = "description")
     private String description;
@@ -59,16 +59,16 @@ public class WaterChange implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getChangeDate() {
+    public ZonedDateTime getChangeDate() {
         return changeDate;
     }
 
-    public WaterChange changeDate(LocalDate changeDate) {
+    public WaterChange changeDate(ZonedDateTime changeDate) {
         this.changeDate = changeDate;
         return this;
     }
 
-    public void setChangeDate(LocalDate changeDate) {
+    public void setChangeDate(ZonedDateTime changeDate) {
         this.changeDate = changeDate;
     }
 

@@ -31,9 +31,9 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.date">Date</span></th>
-            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.no2">No 2</span></th>
-            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.no3">No 3</span></th>
-            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.nh4">Nh 4</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.nO2">N O 2</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.nO3">N O 3</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.nH4">N H 4</span></th>
             <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.ph">Ph</span></th>
             <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.tempVal">Temp Val</span></th>
             <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.timestamp">Timestamp</span></th>
@@ -44,10 +44,10 @@
             <tbody>
             <tr *ngFor="let chemicalAnalysis of chemicalAnalyses ;trackBy: trackId">
                 <td><a [routerLink]="['../chemical-analysis-pond-suffix', chemicalAnalysis.id ]">{{chemicalAnalysis.id}}</a></td>
-                <td>{{chemicalAnalysis.date | date:'mediumDate'}}</td>
-                <td>{{chemicalAnalysis.no2}}</td>
-                <td>{{chemicalAnalysis.no3}}</td>
-                <td>{{chemicalAnalysis.nh4}}</td>
+                <td>{{chemicalAnalysis.date | date:'medium'}}</td>
+                <td>{{chemicalAnalysis.nO2}}</td>
+                <td>{{chemicalAnalysis.nO3}}</td>
+                <td>{{chemicalAnalysis.nH4}}</td>
                 <td>{{chemicalAnalysis.ph}}</td>
                 <td>{{chemicalAnalysis.tempVal}}</td>
                 <td>{{chemicalAnalysis.timestamp}}</td>

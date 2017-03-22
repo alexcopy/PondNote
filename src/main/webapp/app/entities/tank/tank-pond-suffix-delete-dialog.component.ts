@@ -22,7 +22,7 @@ export class TankPondSuffixDeleteDialogComponent {
         public activeModal: NgbActiveModal,
         private eventManager: EventManager
     ) {
-        this.jhiLanguageService.setLocations(['tank']);
+        this.jhiLanguageService.setLocations(['tank', 'tankType']);
     }
 
     clear () {

@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -28,7 +28,7 @@ public class TempMeter implements Serializable {
     private Long id;
 
     @Column(name = "reading_date")
-    private LocalDate readingDate;
+    private ZonedDateTime readingDate;
 
     @NotNull
     @Column(name = "temp_val", nullable = false)
@@ -53,16 +53,16 @@ public class TempMeter implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getReadingDate() {
+    public ZonedDateTime getReadingDate() {
         return readingDate;
     }
 
-    public TempMeter readingDate(LocalDate readingDate) {
+    public TempMeter readingDate(ZonedDateTime readingDate) {
         this.readingDate = readingDate;
         return this;
     }
 
-    public void setReadingDate(LocalDate readingDate) {
+    public void setReadingDate(ZonedDateTime readingDate) {
         this.readingDate = readingDate;
     }
 

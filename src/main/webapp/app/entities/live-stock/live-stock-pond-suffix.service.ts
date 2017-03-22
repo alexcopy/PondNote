@@ -14,8 +14,7 @@ export class LiveStockPondSuffixService {
 
     create(liveStock: LiveStockPondSuffix): Observable<LiveStockPondSuffix> {
         let copy: LiveStockPondSuffix = Object.assign({}, liveStock);
-        copy.date = this.dateUtils
-            .convertLocalDateToServer(liveStock.date);
+        copy.date = this.dateUtils.toDate(liveStock.date);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -23,8 +22,8 @@ export class LiveStockPondSuffixService {
 
     update(liveStock: LiveStockPondSuffix): Observable<LiveStockPondSuffix> {
         let copy: LiveStockPondSuffix = Object.assign({}, liveStock);
-        copy.date = this.dateUtils
-            .convertLocalDateToServer(liveStock.date);
+
+        copy.date = this.dateUtils.toDate(liveStock.date);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -34,7 +33,7 @@ export class LiveStockPondSuffixService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             let jsonResponse = res.json();
             jsonResponse.date = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse.date);
+                .convertDateTimeFromServer(jsonResponse.date);
             return jsonResponse;
         });
     }
@@ -61,7 +60,7 @@ export class LiveStockPondSuffixService {
         let jsonResponse = res.json();
         for (let i = 0; i < jsonResponse.length; i++) {
             jsonResponse[i].date = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse[i].date);
+                .convertDateTimeFromServer(jsonResponse[i].date);
         }
         res._body = jsonResponse;
         return res;

@@ -17,9 +17,9 @@
                 "title": "Chemical Analysis"
             },
             "date": "Date",
-            "no2": "No 2",
-            "no3": "No 3",
-            "nh4": "Nh 4",
+            "nO2": "N O 2",
+            "nO3": "N O 3",
+            "nH4": "N H 4",
             "ph": "Ph",
             "tempVal": "Temp Val",
             "timestamp": "Timestamp",

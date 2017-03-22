@@ -1,6 +1,15 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "location",
+            "otherEntityName": "location",
+            "otherEntityField": "streetAddress",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tank"
+        }
+    ],
     "fields": [
         {
             "fieldName": "tankName",
@@ -11,17 +20,14 @@
         },
         {
             "fieldName": "tankType",
-            "fieldType": "String",
+            "fieldType": "TankType",
+            "fieldValues": "POND,AQUARIUM",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
             "fieldName": "description",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "location",
             "fieldType": "String"
         },
         {

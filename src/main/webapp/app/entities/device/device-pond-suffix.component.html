@@ -42,7 +42,7 @@
             <tr *ngFor="let device of devices ;trackBy: trackId">
                 <td><a [routerLink]="['../device-pond-suffix', device.id ]">{{device.id}}</a></td>
                 <td>{{device.deviceName}}</td>
-                <td>{{device.deviceType}}</td>
+                <td jhiTranslate="{{'pondNotesApp.DeviceType.' + device.deviceType}}">{{device.deviceType}}</td>
                 <td>{{device.description}}</td>
                 <td>{{device.timestamp}}</td>
                 <td>

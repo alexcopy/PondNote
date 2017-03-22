@@ -18,7 +18,7 @@ export class DevicePondSuffixDetailComponent implements OnInit, OnDestroy {
         private deviceService: DevicePondSuffixService,
         private route: ActivatedRoute
     ) {
-        this.jhiLanguageService.setLocations(['device']);
+        this.jhiLanguageService.setLocations(['device', 'deviceType']);
     }
 
     ngOnInit() {

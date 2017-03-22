@@ -42,7 +42,7 @@
             <tbody>
             <tr *ngFor="let chemicals of chemicals ;trackBy: trackId">
                 <td><a [routerLink]="['../chemicals-pond-suffix', chemicals.id ]">{{chemicals.id}}</a></td>
-                <td>{{chemicals.date | date:'mediumDate'}}</td>
+                <td>{{chemicals.date | date:'medium'}}</td>
                 <td>{{chemicals.qty}}</td>
                 <td>{{chemicals.reason}}</td>
                 <td>{{chemicals.tempVal}}</td>

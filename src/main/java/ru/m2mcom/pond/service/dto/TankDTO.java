@@ -3,7 +3,10 @@ package ru.m2mcom.pond.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
+import ru.m2mcom.pond.domain.enumeration.TankType;
 
 /**
  * A DTO for the Tank entity.
@@ -16,14 +19,16 @@ public class TankDTO implements Serializable {
     private String tankName;
 
     @NotNull
-    private String tankType;
+    private TankType tankType;
 
     private String description;
 
-    private String location;
-
     @NotNull
     private Integer timestamp;
+
+    private Long locationId;
+
+    private String locationStreetAddress;
 
     public Long getId() {
         return id;
@@ -39,11 +44,11 @@ public class TankDTO implements Serializable {
     public void setTankName(String tankName) {
         this.tankName = tankName;
     }
-    public String getTankType() {
+    public TankType getTankType() {
         return tankType;
     }
 
-    public void setTankType(String tankType) {
+    public void setTankType(TankType tankType) {
         this.tankType = tankType;
     }
     public String getDescription() {
@@ -53,19 +58,28 @@ public class TankDTO implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
     public Integer getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(Integer timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Long getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getLocationStreetAddress() {
+        return locationStreetAddress;
+    }
+
+    public void setLocationStreetAddress(String locationStreetAddress) {
+        this.locationStreetAddress = locationStreetAddress;
     }
 
     @Override
@@ -96,7 +110,6 @@ public class TankDTO implements Serializable {
             ", tankName='" + tankName + "'" +
             ", tankType='" + tankType + "'" +
             ", description='" + description + "'" +
-            ", location='" + location + "'" +
             ", timestamp='" + timestamp + "'" +
             '}';
     }

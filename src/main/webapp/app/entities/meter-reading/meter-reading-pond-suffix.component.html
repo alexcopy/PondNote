@@ -41,7 +41,7 @@
             <tbody>
             <tr *ngFor="let meterReading of meterReadings ;trackBy: trackId">
                 <td><a [routerLink]="['../meter-reading-pond-suffix', meterReading.id ]">{{meterReading.id}}</a></td>
-                <td>{{meterReading.readingDate | date:'mediumDate'}}</td>
+                <td>{{meterReading.readingDate | date:'medium'}}</td>
                 <td>{{meterReading.description}}</td>
                 <td>{{meterReading.reading}}</td>
                 <td>{{meterReading.tempVal}}</td>

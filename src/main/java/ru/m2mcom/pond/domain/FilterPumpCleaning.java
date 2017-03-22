@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -27,7 +27,7 @@ public class FilterPumpCleaning implements Serializable {
 
     @NotNull
     @Column(name = "cleaning_date", nullable = false)
-    private LocalDate cleaningDate;
+    private ZonedDateTime cleaningDate;
 
     @Column(name = "description")
     private String description;
@@ -50,16 +50,16 @@ public class FilterPumpCleaning implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getCleaningDate() {
+    public ZonedDateTime getCleaningDate() {
         return cleaningDate;
     }
 
-    public FilterPumpCleaning cleaningDate(LocalDate cleaningDate) {
+    public FilterPumpCleaning cleaningDate(ZonedDateTime cleaningDate) {
         this.cleaningDate = cleaningDate;
         return this;
     }
 
-    public void setCleaningDate(LocalDate cleaningDate) {
+    public void setCleaningDate(ZonedDateTime cleaningDate) {
         this.cleaningDate = cleaningDate;
     }
 

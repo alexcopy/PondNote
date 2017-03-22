@@ -16,36 +16,37 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.date" for="field_date">Date</label>
-            <div class="input-group">
-                <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker  #dateDp="ngbDatepicker" [(ngModel)]="chemicalAnalysis.date"
-                required/>
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" (click)="dateDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
+            <div class="d-flex">
+                <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="chemicalAnalysis.date"
+                required  />
             </div>
             <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.date?.errors?.required" jhiTranslate="entity.validation.required">
                    This field is required.
                 </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.date?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.no2" for="field_no2">No 2</label>
-            <input type="text" class="form-control" name="no2" id="field_no2"
-                [(ngModel)]="chemicalAnalysis.no2"
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.nO2" for="field_nO2">N O 2</label>
+            <input type="text" class="form-control" name="nO2" id="field_nO2"
+                [(ngModel)]="chemicalAnalysis.nO2"
              />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.no3" for="field_no3">No 3</label>
-            <input type="text" class="form-control" name="no3" id="field_no3"
-                [(ngModel)]="chemicalAnalysis.no3"
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.nO3" for="field_nO3">N O 3</label>
+            <input type="text" class="form-control" name="nO3" id="field_nO3"
+                [(ngModel)]="chemicalAnalysis.nO3"
              />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.nh4" for="field_nh4">Nh 4</label>
-            <input type="text" class="form-control" name="nh4" id="field_nh4"
-                [(ngModel)]="chemicalAnalysis.nh4"
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.nH4" for="field_nH4">N H 4</label>
+            <input type="text" class="form-control" name="nH4" id="field_nH4"
+                [(ngModel)]="chemicalAnalysis.nH4"
              />
         </div>
         <div class="form-group">

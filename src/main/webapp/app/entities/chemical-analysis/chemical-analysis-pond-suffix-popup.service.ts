@@ -1,12 +1,14 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { ChemicalAnalysisPondSuffix } from './chemical-analysis-pond-suffix.model';
 import { ChemicalAnalysisPondSuffixService } from './chemical-analysis-pond-suffix.service';
 @Injectable()
 export class ChemicalAnalysisPondSuffixPopupService {
     private isOpen = false;
     constructor (
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private chemicalAnalysisService: ChemicalAnalysisPondSuffixService
@@ -21,13 +23,8 @@ export class ChemicalAnalysisPondSuffixPopupService {
 
         if (id) {
             this.chemicalAnalysisService.find(id).subscribe(chemicalAnalysis => {
-                if (chemicalAnalysis.date) {
-                    chemicalAnalysis.date = {
-                        year: chemicalAnalysis.date.getFullYear(),
-                        month: chemicalAnalysis.date.getMonth() + 1,
-                        day: chemicalAnalysis.date.getDate()
-                    };
-                }
+                chemicalAnalysis.date = this.datePipe
+                    .transform(chemicalAnalysis.date, 'yyyy-MM-ddThh:mm');
                 this.chemicalAnalysisModalRef(component, chemicalAnalysis);
             });
         } else {

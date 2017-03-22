@@ -39,7 +39,7 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let tempMeter of tempMeters ;trackBy: trackId">
                 <td><a [routerLink]="['../temp-meter-pond-suffix', tempMeter.id ]">{{tempMeter.id}}</a></td>
-                <td>{{tempMeter.readingDate | date:'mediumDate'}}</td>
+                <td>{{tempMeter.readingDate | date:'medium'}}</td>
                 <td>{{tempMeter.tempVal}}</td>
                 <td>{{tempMeter.timestamp}}</td>
                 <td class="text-right">

@@ -14,8 +14,7 @@ export class OtherWorksPondSuffixService {
 
     create(otherWorks: OtherWorksPondSuffix): Observable<OtherWorksPondSuffix> {
         let copy: OtherWorksPondSuffix = Object.assign({}, otherWorks);
-        copy.date = this.dateUtils
-            .convertLocalDateToServer(otherWorks.date);
+        copy.date = this.dateUtils.toDate(otherWorks.date);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -23,8 +22,8 @@ export class OtherWorksPondSuffixService {
 
     update(otherWorks: OtherWorksPondSuffix): Observable<OtherWorksPondSuffix> {
         let copy: OtherWorksPondSuffix = Object.assign({}, otherWorks);
-        copy.date = this.dateUtils
-            .convertLocalDateToServer(otherWorks.date);
+
+        copy.date = this.dateUtils.toDate(otherWorks.date);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -34,7 +33,7 @@ export class OtherWorksPondSuffixService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             let jsonResponse = res.json();
             jsonResponse.date = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse.date);
+                .convertDateTimeFromServer(jsonResponse.date);
             return jsonResponse;
         });
     }
@@ -61,7 +60,7 @@ export class OtherWorksPondSuffixService {
         let jsonResponse = res.json();
         for (let i = 0; i < jsonResponse.length; i++) {
             jsonResponse[i].date = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse[i].date);
+                .convertDateTimeFromServer(jsonResponse[i].date);
         }
         res._body = jsonResponse;
         return res;

@@ -14,8 +14,7 @@ export class ChemicalAnalysisPondSuffixService {
 
     create(chemicalAnalysis: ChemicalAnalysisPondSuffix): Observable<ChemicalAnalysisPondSuffix> {
         let copy: ChemicalAnalysisPondSuffix = Object.assign({}, chemicalAnalysis);
-        copy.date = this.dateUtils
-            .convertLocalDateToServer(chemicalAnalysis.date);
+        copy.date = this.dateUtils.toDate(chemicalAnalysis.date);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -23,8 +22,8 @@ export class ChemicalAnalysisPondSuffixService {
 
     update(chemicalAnalysis: ChemicalAnalysisPondSuffix): Observable<ChemicalAnalysisPondSuffix> {
         let copy: ChemicalAnalysisPondSuffix = Object.assign({}, chemicalAnalysis);
-        copy.date = this.dateUtils
-            .convertLocalDateToServer(chemicalAnalysis.date);
+
+        copy.date = this.dateUtils.toDate(chemicalAnalysis.date);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
@@ -34,7 +33,7 @@ export class ChemicalAnalysisPondSuffixService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             let jsonResponse = res.json();
             jsonResponse.date = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse.date);
+                .convertDateTimeFromServer(jsonResponse.date);
             return jsonResponse;
         });
     }
@@ -61,7 +60,7 @@ export class ChemicalAnalysisPondSuffixService {
         let jsonResponse = res.json();
         for (let i = 0; i < jsonResponse.length; i++) {
             jsonResponse[i].date = this.dateUtils
-                .convertLocalDateFromServer(jsonResponse[i].date);
+                .convertDateTimeFromServer(jsonResponse[i].date);
         }
         res._body = jsonResponse;
         return res;

@@ -13,21 +13,21 @@
     "fields": [
         {
             "fieldName": "date",
-            "fieldType": "LocalDate",
+            "fieldType": "ZonedDateTime",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "no2",
+            "fieldName": "nO2",
             "fieldType": "String"
         },
         {
-            "fieldName": "no3",
+            "fieldName": "nO3",
             "fieldType": "String"
         },
         {
-            "fieldName": "nh4",
+            "fieldName": "nH4",
             "fieldType": "String"
         },
         {

@@ -25,10 +25,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.util.List;
 
+import static ru.m2mcom.pond.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -43,8 +46,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PondNotesApp.class)
 public class WaterChangeResourceIntTest {
 
-    private static final LocalDate DEFAULT_CHANGE_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CHANGE_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_CHANGE_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_CHANGE_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -257,7 +260,7 @@ public class WaterChangeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(waterChange.getId().intValue())))
-            .andExpect(jsonPath("$.[*].changeDate").value(hasItem(DEFAULT_CHANGE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].changeDate").value(hasItem(sameInstant(DEFAULT_CHANGE_DATE))))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].readingBefore").value(hasItem(DEFAULT_READING_BEFORE.doubleValue())))
             .andExpect(jsonPath("$.[*].readingAfter").value(hasItem(DEFAULT_READING_AFTER.doubleValue())))
@@ -276,7 +279,7 @@ public class WaterChangeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(waterChange.getId().intValue()))
-            .andExpect(jsonPath("$.changeDate").value(DEFAULT_CHANGE_DATE.toString()))
+            .andExpect(jsonPath("$.changeDate").value(sameInstant(DEFAULT_CHANGE_DATE)))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.readingBefore").value(DEFAULT_READING_BEFORE.doubleValue()))
             .andExpect(jsonPath("$.readingAfter").value(DEFAULT_READING_AFTER.doubleValue()))
@@ -385,7 +388,7 @@ public class WaterChangeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(waterChange.getId().intValue())))
-            .andExpect(jsonPath("$.[*].changeDate").value(hasItem(DEFAULT_CHANGE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].changeDate").value(hasItem(sameInstant(DEFAULT_CHANGE_DATE))))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].readingBefore").value(hasItem(DEFAULT_READING_BEFORE.doubleValue())))
             .andExpect(jsonPath("$.[*].readingAfter").value(hasItem(DEFAULT_READING_AFTER.doubleValue())))

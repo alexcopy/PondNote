@@ -28,7 +28,7 @@ tanks: TankPondSuffix[];
         private principal: Principal
     ) {
         this.currentSearch = activatedRoute.snapshot.params['search'] ? activatedRoute.snapshot.params['search'] : '';
-        this.jhiLanguageService.setLocations(['tank']);
+        this.jhiLanguageService.setLocations(['tank', 'tankType']);
     }
 
     loadAll() {

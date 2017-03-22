@@ -43,7 +43,7 @@
             <tbody>
             <tr *ngFor="let liveStock of liveStocks ;trackBy: trackId">
                 <td><a [routerLink]="['../live-stock-pond-suffix', liveStock.id ]">{{liveStock.id}}</a></td>
-                <td>{{liveStock.date | date:'mediumDate'}}</td>
+                <td>{{liveStock.date | date:'medium'}}</td>
                 <td jhiTranslate="{{'pondNotesApp.StockCase.' + liveStock.reason}}">{{liveStock.reason}}</td>
                 <td>{{liveStock.description}}</td>
                 <td>{{liveStock.qty}}</td>

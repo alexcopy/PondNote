@@ -41,7 +41,7 @@
             <tbody>
             <tr *ngFor="let filterPumpCleaning of filterPumpCleanings ;trackBy: trackId">
                 <td><a [routerLink]="['../filter-pump-cleaning-pond-suffix', filterPumpCleaning.id ]">{{filterPumpCleaning.id}}</a></td>
-                <td>{{filterPumpCleaning.cleaningDate | date:'mediumDate'}}</td>
+                <td>{{filterPumpCleaning.cleaningDate | date:'medium'}}</td>
                 <td>{{filterPumpCleaning.description}}</td>
                 <td>{{filterPumpCleaning.tempVal}}</td>
                 <td>{{filterPumpCleaning.timestamp}}</td>

@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -29,16 +29,16 @@ public class ChemicalAnalysis implements Serializable {
 
     @NotNull
     @Column(name = "date", nullable = false)
-    private LocalDate date;
+    private ZonedDateTime date;
 
-    @Column(name = "no_2")
-    private String no2;
+    @Column(name = "n_o_2")
+    private String nO2;
 
-    @Column(name = "no_3")
-    private String no3;
+    @Column(name = "n_o_3")
+    private String nO3;
 
-    @Column(name = "nh_4")
-    private String nh4;
+    @Column(name = "n_h_4")
+    private String nH4;
 
     @Column(name = "ph")
     private String ph;
@@ -65,56 +65,56 @@ public class ChemicalAnalysis implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
-    public ChemicalAnalysis date(LocalDate date) {
+    public ChemicalAnalysis date(ZonedDateTime date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(ZonedDateTime date) {
         this.date = date;
     }
 
-    public String getNo2() {
-        return no2;
+    public String getnO2() {
+        return nO2;
     }
 
-    public ChemicalAnalysis no2(String no2) {
-        this.no2 = no2;
+    public ChemicalAnalysis nO2(String nO2) {
+        this.nO2 = nO2;
         return this;
     }
 
-    public void setNo2(String no2) {
-        this.no2 = no2;
+    public void setnO2(String nO2) {
+        this.nO2 = nO2;
     }
 
-    public String getNo3() {
-        return no3;
+    public String getnO3() {
+        return nO3;
     }
 
-    public ChemicalAnalysis no3(String no3) {
-        this.no3 = no3;
+    public ChemicalAnalysis nO3(String nO3) {
+        this.nO3 = nO3;
         return this;
     }
 
-    public void setNo3(String no3) {
-        this.no3 = no3;
+    public void setnO3(String nO3) {
+        this.nO3 = nO3;
     }
 
-    public String getNh4() {
-        return nh4;
+    public String getnH4() {
+        return nH4;
     }
 
-    public ChemicalAnalysis nh4(String nh4) {
-        this.nh4 = nh4;
+    public ChemicalAnalysis nH4(String nH4) {
+        this.nH4 = nH4;
         return this;
     }
 
-    public void setNh4(String nh4) {
-        this.nh4 = nh4;
+    public void setnH4(String nH4) {
+        this.nH4 = nH4;
     }
 
     public String getPh() {
@@ -204,9 +204,9 @@ public class ChemicalAnalysis implements Serializable {
         return "ChemicalAnalysis{" +
             "id=" + id +
             ", date='" + date + "'" +
-            ", no2='" + no2 + "'" +
-            ", no3='" + no3 + "'" +
-            ", nh4='" + nh4 + "'" +
+            ", nO2='" + nO2 + "'" +
+            ", nO3='" + nO3 + "'" +
+            ", nH4='" + nH4 + "'" +
             ", ph='" + ph + "'" +
             ", tempVal='" + tempVal + "'" +
             ", timestamp='" + timestamp + "'" +

@@ -1,12 +1,14 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { TempMeterPondSuffix } from './temp-meter-pond-suffix.model';
 import { TempMeterPondSuffixService } from './temp-meter-pond-suffix.service';
 @Injectable()
 export class TempMeterPondSuffixPopupService {
     private isOpen = false;
     constructor (
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private tempMeterService: TempMeterPondSuffixService
@@ -21,13 +23,8 @@ export class TempMeterPondSuffixPopupService {
 
         if (id) {
             this.tempMeterService.find(id).subscribe(tempMeter => {
-                if (tempMeter.readingDate) {
-                    tempMeter.readingDate = {
-                        year: tempMeter.readingDate.getFullYear(),
-                        month: tempMeter.readingDate.getMonth() + 1,
-                        day: tempMeter.readingDate.getDate()
-                    };
-                }
+                tempMeter.readingDate = this.datePipe
+                    .transform(tempMeter.readingDate, 'yyyy-MM-ddThh:mm');
                 this.tempMeterModalRef(component, tempMeter);
             });
         } else {

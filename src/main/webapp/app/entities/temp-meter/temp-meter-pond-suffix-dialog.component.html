@@ -16,12 +16,9 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="pondNotesApp.tempMeter.readingDate" for="field_readingDate">Reading Date</label>
-            <div class="input-group">
-                <input id="field_readingDate" type="text" class="form-control" name="readingDate" ngbDatepicker  #readingDateDp="ngbDatepicker" [(ngModel)]="tempMeter.readingDate"
-                />
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" (click)="readingDateDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
+            <div class="d-flex">
+                <input id="field_readingDate" type="datetime-local" class="form-control" name="readingDate" [(ngModel)]="tempMeter.readingDate"
+                  />
             </div>
         </div>
         <div class="form-group">

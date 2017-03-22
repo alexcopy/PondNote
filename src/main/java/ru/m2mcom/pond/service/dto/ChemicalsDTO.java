@@ -1,6 +1,7 @@
 package ru.m2mcom.pond.service.dto;
 
-import java.time.LocalDate;
+
+import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ public class ChemicalsDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private LocalDate date;
+    private ZonedDateTime date;
 
     private Integer qty;
 
@@ -37,11 +38,11 @@ public class ChemicalsDTO implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    public LocalDate getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(ZonedDateTime date) {
         this.date = date;
     }
     public Integer getQty() {

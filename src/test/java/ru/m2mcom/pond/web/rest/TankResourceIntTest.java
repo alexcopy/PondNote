@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import ru.m2mcom.pond.domain.enumeration.TankType;
 /**
  * Test class for the TankResource REST controller.
  *
@@ -44,14 +45,11 @@ public class TankResourceIntTest {
     private static final String DEFAULT_TANK_NAME = "AAAAAAAAAA";
     private static final String UPDATED_TANK_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TANK_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_TANK_TYPE = "BBBBBBBBBB";
+    private static final TankType DEFAULT_TANK_TYPE = TankType.POND;
+    private static final TankType UPDATED_TANK_TYPE = TankType.AQUARIUM;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
-
-    private static final String DEFAULT_LOCATION = "AAAAAAAAAA";
-    private static final String UPDATED_LOCATION = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_TIMESTAMP = 1;
     private static final Integer UPDATED_TIMESTAMP = 2;
@@ -105,7 +103,6 @@ public class TankResourceIntTest {
             .tankName(DEFAULT_TANK_NAME)
             .tankType(DEFAULT_TANK_TYPE)
             .description(DEFAULT_DESCRIPTION)
-            .location(DEFAULT_LOCATION)
             .timestamp(DEFAULT_TIMESTAMP);
         return tank;
     }
@@ -135,7 +132,6 @@ public class TankResourceIntTest {
         assertThat(testTank.getTankName()).isEqualTo(DEFAULT_TANK_NAME);
         assertThat(testTank.getTankType()).isEqualTo(DEFAULT_TANK_TYPE);
         assertThat(testTank.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testTank.getLocation()).isEqualTo(DEFAULT_LOCATION);
         assertThat(testTank.getTimestamp()).isEqualTo(DEFAULT_TIMESTAMP);
 
         // Validate the Tank in Elasticsearch
@@ -234,7 +230,6 @@ public class TankResourceIntTest {
             .andExpect(jsonPath("$.[*].tankName").value(hasItem(DEFAULT_TANK_NAME.toString())))
             .andExpect(jsonPath("$.[*].tankType").value(hasItem(DEFAULT_TANK_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
             .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));
     }
 
@@ -252,7 +247,6 @@ public class TankResourceIntTest {
             .andExpect(jsonPath("$.tankName").value(DEFAULT_TANK_NAME.toString()))
             .andExpect(jsonPath("$.tankType").value(DEFAULT_TANK_TYPE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
             .andExpect(jsonPath("$.timestamp").value(DEFAULT_TIMESTAMP));
     }
 
@@ -278,7 +272,6 @@ public class TankResourceIntTest {
             .tankName(UPDATED_TANK_NAME)
             .tankType(UPDATED_TANK_TYPE)
             .description(UPDATED_DESCRIPTION)
-            .location(UPDATED_LOCATION)
             .timestamp(UPDATED_TIMESTAMP);
         TankDTO tankDTO = tankMapper.tankToTankDTO(updatedTank);
 
@@ -294,7 +287,6 @@ public class TankResourceIntTest {
         assertThat(testTank.getTankName()).isEqualTo(UPDATED_TANK_NAME);
         assertThat(testTank.getTankType()).isEqualTo(UPDATED_TANK_TYPE);
         assertThat(testTank.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testTank.getLocation()).isEqualTo(UPDATED_LOCATION);
         assertThat(testTank.getTimestamp()).isEqualTo(UPDATED_TIMESTAMP);
 
         // Validate the Tank in Elasticsearch
@@ -358,7 +350,6 @@ public class TankResourceIntTest {
             .andExpect(jsonPath("$.[*].tankName").value(hasItem(DEFAULT_TANK_NAME.toString())))
             .andExpect(jsonPath("$.[*].tankType").value(hasItem(DEFAULT_TANK_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
             .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));
     }
 
