@@ -8,6 +8,8 @@ import ru.m2mcom.pond.service.dto.ChemicalAnalysisDTO;
 import ru.m2mcom.pond.service.mapper.ChemicalAnalysisMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -58,17 +60,15 @@ public class ChemicalAnalysisServiceImpl implements ChemicalAnalysisService{
     /**
      *  Get all the chemicalAnalyses.
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ChemicalAnalysisDTO> findAll() {
+    public Page<ChemicalAnalysisDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ChemicalAnalyses");
-        List<ChemicalAnalysisDTO> result = chemicalAnalysisRepository.findAllWithEagerRelationships().stream()
-            .map(chemicalAnalysisMapper::chemicalAnalysisToChemicalAnalysisDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-
-        return result;
+        Page<ChemicalAnalysis> result = chemicalAnalysisRepository.findAll(pageable);
+        return result.map(chemicalAnalysis -> chemicalAnalysisMapper.chemicalAnalysisToChemicalAnalysisDTO(chemicalAnalysis));
     }
 
     /**
@@ -102,15 +102,14 @@ public class ChemicalAnalysisServiceImpl implements ChemicalAnalysisService{
      * Search for the chemicalAnalysis corresponding to the query.
      *
      *  @param query the query of the search
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ChemicalAnalysisDTO> search(String query) {
-        log.debug("Request to search ChemicalAnalyses for query {}", query);
-        return StreamSupport
-            .stream(chemicalAnalysisSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(chemicalAnalysisMapper::chemicalAnalysisToChemicalAnalysisDTO)
-            .collect(Collectors.toList());
+    public Page<ChemicalAnalysisDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of ChemicalAnalyses for query {}", query);
+        Page<ChemicalAnalysis> result = chemicalAnalysisSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(chemicalAnalysis -> chemicalAnalysisMapper.chemicalAnalysisToChemicalAnalysisDTO(chemicalAnalysis));
     }
 }

@@ -1,6 +1,8 @@
 package ru.m2mcom.pond.service;
 
 import ru.m2mcom.pond.service.dto.ChemicalAnalysisDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
@@ -19,9 +21,10 @@ public interface ChemicalAnalysisService {
     /**
      *  Get all the chemicalAnalyses.
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<ChemicalAnalysisDTO> findAll();
+    Page<ChemicalAnalysisDTO> findAll(Pageable pageable);
 
     /**
      *  Get the "id" chemicalAnalysis.
@@ -43,7 +46,8 @@ public interface ChemicalAnalysisService {
      *
      *  @param query the query of the search
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<ChemicalAnalysisDTO> search(String query);
+    Page<ChemicalAnalysisDTO> search(String query, Pageable pageable);
 }

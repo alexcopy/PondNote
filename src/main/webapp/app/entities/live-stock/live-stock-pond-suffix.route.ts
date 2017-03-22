@@ -11,11 +11,29 @@ import { LiveStockPondSuffixDeletePopupComponent } from './live-stock-pond-suffi
 
 import { Principal } from '../../shared';
 
+@Injectable()
+export class LiveStockPondSuffixResolvePagingParams implements Resolve<any> {
+
+  constructor(private paginationUtil: PaginationUtil) {}
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+      let page = route.queryParams['page'] ? route.queryParams['page'] : '1';
+      let sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
+      return {
+          page: this.paginationUtil.parsePage(page),
+          predicate: this.paginationUtil.parsePredicate(sort),
+          ascending: this.paginationUtil.parseAscending(sort)
+    };
+  }
+}
 
 export const liveStockRoute: Routes = [
   {
     path: 'live-stock-pond-suffix',
     component: LiveStockPondSuffixComponent,
+    resolve: {
+      'pagingParams': LiveStockPondSuffixResolvePagingParams
+    },
     data: {
         authorities: ['ROLE_USER'],
         pageTitle: 'pondNotesApp.liveStock.home.title'

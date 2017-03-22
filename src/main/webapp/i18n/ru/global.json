@@ -4,7 +4,7 @@
         "browsehappy": "Ваш браузер <strong>устарел</strong>. Пожалуйста <a href=\"http://browsehappy.com/?locale=ru\">обновите ваш браузер</a>.",
         "menu": {
             "home": "Главная",
-            "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "jhipster-needle-menu-add-element": "PNotes will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Сущности",
                 "devicePondSuffix": "Device",
@@ -18,7 +18,7 @@
                 "tankPondSuffix": "Tank",
                 "waterChangePondSuffix": "Water Change",
                 "locationPondSuffix": "Location",
-                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+                "jhipster-needle-menu-add-entry": "PNotes will add additional entities here (do not translate!)"
             },
             "account": {
                 "main": "Профиль",
@@ -40,7 +40,7 @@
                 "audits": "Аудит",
                 "apidocs": "API",
                 "database": "База данных",
-                "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+                "jhipster-needle-menu-add-admin-element": "PNotes will add additional menu entries here (do not translate!)"
             },
             "language": "Язык"
         },

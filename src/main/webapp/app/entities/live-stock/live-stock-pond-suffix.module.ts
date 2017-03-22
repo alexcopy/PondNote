@@ -14,6 +14,7 @@ import {
     LiveStockPondSuffixDeleteDialogComponent,
     liveStockRoute,
     liveStockPopupRoute,
+    LiveStockPondSuffixResolvePagingParams,
 } from './';
 
 let ENTITY_STATES = [
@@ -44,6 +45,7 @@ let ENTITY_STATES = [
     providers: [
         LiveStockPondSuffixService,
         LiveStockPondSuffixPopupService,
+        LiveStockPondSuffixResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

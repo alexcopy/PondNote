@@ -39,7 +39,7 @@
     "changelogDate": "20170322001017",
     "entityTableName": "chemicals",
     "dto": "mapstruct",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "serviceImpl",
     "angularJSSuffix": "pondSuffix"
 }

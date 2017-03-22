@@ -8,6 +8,8 @@ import ru.m2mcom.pond.service.dto.LiveStockDTO;
 import ru.m2mcom.pond.service.mapper.LiveStockMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -58,17 +60,15 @@ public class LiveStockServiceImpl implements LiveStockService{
     /**
      *  Get all the liveStocks.
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<LiveStockDTO> findAll() {
+    public Page<LiveStockDTO> findAll(Pageable pageable) {
         log.debug("Request to get all LiveStocks");
-        List<LiveStockDTO> result = liveStockRepository.findAll().stream()
-            .map(liveStockMapper::liveStockToLiveStockDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-
-        return result;
+        Page<LiveStock> result = liveStockRepository.findAll(pageable);
+        return result.map(liveStock -> liveStockMapper.liveStockToLiveStockDTO(liveStock));
     }
 
     /**
@@ -102,15 +102,14 @@ public class LiveStockServiceImpl implements LiveStockService{
      * Search for the liveStock corresponding to the query.
      *
      *  @param query the query of the search
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<LiveStockDTO> search(String query) {
-        log.debug("Request to search LiveStocks for query {}", query);
-        return StreamSupport
-            .stream(liveStockSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(liveStockMapper::liveStockToLiveStockDTO)
-            .collect(Collectors.toList());
+    public Page<LiveStockDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of LiveStocks for query {}", query);
+        Page<LiveStock> result = liveStockSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(liveStock -> liveStockMapper.liveStockToLiveStockDTO(liveStock));
     }
 }

@@ -28,15 +28,15 @@
     <div class="table-responsive" *ngIf="liveStocks">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="pondNotesApp.liveStock.date">Date</span></th>
-            <th><span jhiTranslate="pondNotesApp.liveStock.reason">Reason</span></th>
-            <th><span jhiTranslate="pondNotesApp.liveStock.description">Description</span></th>
-            <th><span jhiTranslate="pondNotesApp.liveStock.qty">Qty</span></th>
-            <th><span jhiTranslate="pondNotesApp.liveStock.tempVal">Temp Val</span></th>
-            <th><span jhiTranslate="pondNotesApp.liveStock.timestamp">Timestamp</span></th>
-            <th><span jhiTranslate="pondNotesApp.liveStock.tank">Tank</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="date"><span jhiTranslate="pondNotesApp.liveStock.date">Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="reason"><span jhiTranslate="pondNotesApp.liveStock.reason">Reason</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="pondNotesApp.liveStock.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="qty"><span jhiTranslate="pondNotesApp.liveStock.qty">Qty</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tempVal"><span jhiTranslate="pondNotesApp.liveStock.tempVal">Temp Val</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="timestamp"><span jhiTranslate="pondNotesApp.liveStock.timestamp">Timestamp</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tankTankName"><span jhiTranslate="pondNotesApp.liveStock.tank">Tank</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -82,4 +82,12 @@
             </tbody>
         </table>
     </div>
+        <div *ngIf="liveStocks && liveStocks.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
 </div>

@@ -1,6 +1,8 @@
 package ru.m2mcom.pond.service;
 
 import ru.m2mcom.pond.service.dto.LiveStockDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
@@ -19,9 +21,10 @@ public interface LiveStockService {
     /**
      *  Get all the liveStocks.
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<LiveStockDTO> findAll();
+    Page<LiveStockDTO> findAll(Pageable pageable);
 
     /**
      *  Get the "id" liveStock.
@@ -43,7 +46,8 @@ public interface LiveStockService {
      *
      *  @param query the query of the search
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<LiveStockDTO> search(String query);
+    Page<LiveStockDTO> search(String query, Pageable pageable);
 }

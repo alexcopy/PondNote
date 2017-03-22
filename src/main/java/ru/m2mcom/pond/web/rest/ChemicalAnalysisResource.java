@@ -3,10 +3,16 @@ package ru.m2mcom.pond.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import ru.m2mcom.pond.service.ChemicalAnalysisService;
 import ru.m2mcom.pond.web.rest.util.HeaderUtil;
+import ru.m2mcom.pond.web.rest.util.PaginationUtil;
 import ru.m2mcom.pond.service.dto.ChemicalAnalysisDTO;
+import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,13 +89,16 @@ public class ChemicalAnalysisResource {
     /**
      * GET  /chemical-analyses : get all the chemicalAnalyses.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of chemicalAnalyses in body
      */
     @GetMapping("/chemical-analyses")
     @Timed
-    public List<ChemicalAnalysisDTO> getAllChemicalAnalyses() {
-        log.debug("REST request to get all ChemicalAnalyses");
-        return chemicalAnalysisService.findAll();
+    public ResponseEntity<List<ChemicalAnalysisDTO>> getAllChemicalAnalyses(@ApiParam Pageable pageable) {
+        log.debug("REST request to get a page of ChemicalAnalyses");
+        Page<ChemicalAnalysisDTO> page = chemicalAnalysisService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/chemical-analyses");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -125,13 +134,16 @@ public class ChemicalAnalysisResource {
      * to the query.
      *
      * @param query the query of the chemicalAnalysis search 
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/chemical-analyses")
     @Timed
-    public List<ChemicalAnalysisDTO> searchChemicalAnalyses(@RequestParam String query) {
-        log.debug("REST request to search ChemicalAnalyses for query {}", query);
-        return chemicalAnalysisService.search(query);
+    public ResponseEntity<List<ChemicalAnalysisDTO>> searchChemicalAnalyses(@RequestParam String query, @ApiParam Pageable pageable) {
+        log.debug("REST request to search for a page of ChemicalAnalyses for query {}", query);
+        Page<ChemicalAnalysisDTO> page = chemicalAnalysisService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/chemical-analyses");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 

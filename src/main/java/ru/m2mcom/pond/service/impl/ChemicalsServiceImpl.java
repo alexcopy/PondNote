@@ -8,6 +8,8 @@ import ru.m2mcom.pond.service.dto.ChemicalsDTO;
 import ru.m2mcom.pond.service.mapper.ChemicalsMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -58,17 +60,15 @@ public class ChemicalsServiceImpl implements ChemicalsService{
     /**
      *  Get all the chemicals.
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ChemicalsDTO> findAll() {
+    public Page<ChemicalsDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Chemicals");
-        List<ChemicalsDTO> result = chemicalsRepository.findAll().stream()
-            .map(chemicalsMapper::chemicalsToChemicalsDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-
-        return result;
+        Page<Chemicals> result = chemicalsRepository.findAll(pageable);
+        return result.map(chemicals -> chemicalsMapper.chemicalsToChemicalsDTO(chemicals));
     }
 
     /**
@@ -102,15 +102,14 @@ public class ChemicalsServiceImpl implements ChemicalsService{
      * Search for the chemicals corresponding to the query.
      *
      *  @param query the query of the search
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ChemicalsDTO> search(String query) {
-        log.debug("Request to search Chemicals for query {}", query);
-        return StreamSupport
-            .stream(chemicalsSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(chemicalsMapper::chemicalsToChemicalsDTO)
-            .collect(Collectors.toList());
+    public Page<ChemicalsDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of Chemicals for query {}", query);
+        Page<Chemicals> result = chemicalsSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(chemicals -> chemicalsMapper.chemicalsToChemicalsDTO(chemicals));
     }
 }

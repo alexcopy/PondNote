@@ -14,6 +14,7 @@ import {
     ChemicalsPondSuffixDeleteDialogComponent,
     chemicalsRoute,
     chemicalsPopupRoute,
+    ChemicalsPondSuffixResolvePagingParams,
 } from './';
 
 let ENTITY_STATES = [
@@ -44,6 +45,7 @@ let ENTITY_STATES = [
     providers: [
         ChemicalsPondSuffixService,
         ChemicalsPondSuffixPopupService,
+        ChemicalsPondSuffixResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
