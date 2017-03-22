@@ -1,0 +1,27 @@
+{
+    "pondNotesApp": {
+        "chemicals" : {
+            "home": {
+                "title": "Chemicals",
+                "createLabel": "Создать новый Chemicals",
+                "createOrEditLabel": "Создать или отредактировать Chemicals",
+                "search": "Найти Chemicals"
+            },
+            "created": "Новый Chemicals создан с идентификатором {{ param }}",
+            "updated": "Chemicals обновлен с идентификатором {{ param }}",
+            "deleted": "Chemicals удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Chemicals {{ id }}?"
+            },
+            "detail": {
+                "title": "Chemicals"
+            },
+            "date": "Date",
+            "qty": "Qty",
+            "reason": "Reason",
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp",
+            "tank": "Tank"
+        }
+    }
+}

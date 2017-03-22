@@ -1,0 +1,28 @@
+{
+    "pondNotesApp": {
+        "liveStock" : {
+            "home": {
+                "title": "Live Stocks",
+                "createLabel": "Create a new Live Stock",
+                "createOrEditLabel": "Create or edit a Live Stock",
+                "search": "Search for Live Stock"
+            },
+            "created": "A new Live Stock is created with identifier {{ param }}",
+            "updated": "A Live Stock is updated with identifier {{ param }}",
+            "deleted": "A Live Stock is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Live Stock {{ id }}?"
+            },
+            "detail": {
+                "title": "Live Stock"
+            },
+            "date": "Date",
+            "reason": "Reason",
+            "description": "Description",
+            "qty": "Qty",
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp",
+            "tank": "Tank"
+        }
+    }
+}

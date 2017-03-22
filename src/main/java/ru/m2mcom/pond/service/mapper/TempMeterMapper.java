@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Mapper for the entity TempMeter and its DTO TempMeterDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {TankMapper.class, })
 public interface TempMeterMapper {
 
     TempMeterDTO tempMeterToTempMeterDTO(TempMeter tempMeter);

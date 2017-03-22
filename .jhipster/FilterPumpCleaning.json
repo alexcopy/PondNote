@@ -5,13 +5,16 @@
             "relationshipType": "many-to-one",
             "relationshipName": "device",
             "otherEntityName": "device",
-            "otherEntityField": "id"
+            "otherEntityField": "deviceName"
         }
     ],
     "fields": [
         {
             "fieldName": "cleaningDate",
-            "fieldType": "LocalDate"
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "description",
@@ -19,7 +22,10 @@
         },
         {
             "fieldName": "tempVal",
-            "fieldType": "Double"
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "timestamp",

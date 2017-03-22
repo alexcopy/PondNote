@@ -21,6 +21,13 @@ export class TempMeterPondSuffixPopupService {
 
         if (id) {
             this.tempMeterService.find(id).subscribe(tempMeter => {
+                if (tempMeter.readingDate) {
+                    tempMeter.readingDate = {
+                        year: tempMeter.readingDate.getFullYear(),
+                        month: tempMeter.readingDate.getMonth() + 1,
+                        day: tempMeter.readingDate.getDate()
+                    };
+                }
                 this.tempMeterModalRef(component, tempMeter);
             });
         } else {

@@ -1,0 +1,87 @@
+<div>
+    <h2>
+        <span jhiTranslate="pondNotesApp.chemicalAnalysis.home.title">Chemical Analyses</span>
+        <button class="btn btn-primary float-right create-chemical-analysis-pond-suffix" [routerLink]="['/', { outlets: { popup: ['chemical-analysis-pond-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="pondNotesApp.chemicalAnalysis.home.createLabel">
+            Create new Chemical Analysis
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12 no-padding-right">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'pondNotesApp.chemicalAnalysis.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="chemicalAnalyses">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.date">Date</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.no2">No 2</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.no3">No 3</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.nh4">Nh 4</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.ph">Ph</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.tempVal">Temp Val</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.timestamp">Timestamp</span></th>
+            <th><span jhiTranslate="pondNotesApp.chemicalAnalysis.tank">Tank</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let chemicalAnalysis of chemicalAnalyses ;trackBy: trackId">
+                <td><a [routerLink]="['../chemical-analysis-pond-suffix', chemicalAnalysis.id ]">{{chemicalAnalysis.id}}</a></td>
+                <td>{{chemicalAnalysis.date | date:'mediumDate'}}</td>
+                <td>{{chemicalAnalysis.no2}}</td>
+                <td>{{chemicalAnalysis.no3}}</td>
+                <td>{{chemicalAnalysis.nh4}}</td>
+                <td>{{chemicalAnalysis.ph}}</td>
+                <td>{{chemicalAnalysis.tempVal}}</td>
+                <td>{{chemicalAnalysis.timestamp}}</td>
+                <td>
+                    <span *ngFor="let tank of chemicalAnalysis.tanks; let last = last">
+                            <a class="form-control-static" [routerLink]="['../tank-pond-suffix', tank?.id ]">{{tank.tankName}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../chemical-analysis-pond-suffix', chemicalAnalysis.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'chemical-analysis-pond-suffix/'+ chemicalAnalysis.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'chemical-analysis-pond-suffix/'+ chemicalAnalysis.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

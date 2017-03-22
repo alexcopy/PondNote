@@ -4,6 +4,10 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.tempMeter.readingDate">Reading Date</span></dt>
+        <dd>
+            <span>{{tempMeter.readingDate | date:'mediumDate'}}</span>
+        </dd>
         <dt><span jhiTranslate="pondNotesApp.tempMeter.tempVal">Temp Val</span></dt>
         <dd>
             <span>{{tempMeter.tempVal}}</span>
@@ -11,6 +15,12 @@
         <dt><span jhiTranslate="pondNotesApp.tempMeter.timestamp">Timestamp</span></dt>
         <dd>
             <span>{{tempMeter.timestamp}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.tempMeter.tank">Tank</span></dt>
+        <dd>
+            <span *ngFor="let tank of tempMeter.tanks; let last = last">
+                <a [routerLink]="['/tank-pond-suffix', tank?.id ]">{{tank.tankName}}</a>{{last ? '' : ', '}}
+            </span>
         </dd>
     </dl>
 

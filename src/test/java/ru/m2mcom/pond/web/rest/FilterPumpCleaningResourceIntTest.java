@@ -162,6 +162,44 @@ public class FilterPumpCleaningResourceIntTest {
 
     @Test
     @Transactional
+    public void checkCleaningDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = filterPumpCleaningRepository.findAll().size();
+        // set the field null
+        filterPumpCleaning.setCleaningDate(null);
+
+        // Create the FilterPumpCleaning, which fails.
+        FilterPumpCleaningDTO filterPumpCleaningDTO = filterPumpCleaningMapper.filterPumpCleaningToFilterPumpCleaningDTO(filterPumpCleaning);
+
+        restFilterPumpCleaningMockMvc.perform(post("/api/filter-pump-cleanings")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(filterPumpCleaningDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<FilterPumpCleaning> filterPumpCleaningList = filterPumpCleaningRepository.findAll();
+        assertThat(filterPumpCleaningList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTempValIsRequired() throws Exception {
+        int databaseSizeBeforeTest = filterPumpCleaningRepository.findAll().size();
+        // set the field null
+        filterPumpCleaning.setTempVal(null);
+
+        // Create the FilterPumpCleaning, which fails.
+        FilterPumpCleaningDTO filterPumpCleaningDTO = filterPumpCleaningMapper.filterPumpCleaningToFilterPumpCleaningDTO(filterPumpCleaning);
+
+        restFilterPumpCleaningMockMvc.perform(post("/api/filter-pump-cleanings")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(filterPumpCleaningDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<FilterPumpCleaning> filterPumpCleaningList = filterPumpCleaningRepository.findAll();
+        assertThat(filterPumpCleaningList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFilterPumpCleanings() throws Exception {
         // Initialize the database
         filterPumpCleaningRepository.saveAndFlush(filterPumpCleaning);

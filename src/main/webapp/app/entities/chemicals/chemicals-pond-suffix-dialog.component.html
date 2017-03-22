@@ -1,0 +1,84 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myChemicalsLabel" jhiTranslate="pondNotesApp.chemicals.home.createOrEditLabel">Create or edit a Chemicals</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!chemicals.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="chemicals.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicals.date" for="field_date">Date</label>
+            <div class="input-group">
+                <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker  #dateDp="ngbDatepicker" [(ngModel)]="chemicals.date"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.date?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicals.qty" for="field_qty">Qty</label>
+            <input type="number" class="form-control" name="qty" id="field_qty"
+                [(ngModel)]="chemicals.qty"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicals.reason" for="field_reason">Reason</label>
+            <input type="text" class="form-control" name="reason" id="field_reason"
+                [(ngModel)]="chemicals.reason"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicals.tempVal" for="field_tempVal">Temp Val</label>
+            <input type="number" class="form-control" name="tempVal" id="field_tempVal"
+                [(ngModel)]="chemicals.tempVal"
+            required />
+            <div [hidden]="!(editForm.controls.tempVal?.dirty && editForm.controls.tempVal?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.tempVal?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.tempVal?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicals.timestamp" for="field_timestamp">Timestamp</label>
+            <input type="number" class="form-control" name="timestamp" id="field_timestamp"
+                [(ngModel)]="chemicals.timestamp"
+             />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="pondNotesApp.chemicals.tank" for="field_tank">Tank</label>
+            <select class="form-control" id="field_tank" name="tank" [(ngModel)]="chemicals.tankId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tankOption.id" *ngFor="let tankOption of tanks; trackBy: trackTankById">{{tankOption.tankName}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

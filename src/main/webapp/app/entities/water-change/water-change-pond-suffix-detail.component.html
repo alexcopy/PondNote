@@ -1,0 +1,51 @@
+
+<div *ngIf="waterChange">
+    <h2><span jhiTranslate="pondNotesApp.waterChange.detail.title">Water Change</span> {{waterChange.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.waterChange.changeDate">Change Date</span></dt>
+        <dd>
+            <span>{{waterChange.changeDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.waterChange.description">Description</span></dt>
+        <dd>
+            <span>{{waterChange.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.waterChange.readingBefore">Reading Before</span></dt>
+        <dd>
+            <span>{{waterChange.readingBefore}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.waterChange.readingAfter">Reading After</span></dt>
+        <dd>
+            <span>{{waterChange.readingAfter}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.waterChange.tempVal">Temp Val</span></dt>
+        <dd>
+            <span>{{waterChange.tempVal}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.waterChange.timestamp">Timestamp</span></dt>
+        <dd>
+            <span>{{waterChange.timestamp}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.waterChange.tank">Tank</span></dt>
+        <dd>
+            <div *ngIf="waterChange.tankId">
+                <a [routerLink]="['/tank-pond-suffix', waterChange.tankId]">{{waterChange.tankTankName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'water-change-pond-suffix/'+ waterChange.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

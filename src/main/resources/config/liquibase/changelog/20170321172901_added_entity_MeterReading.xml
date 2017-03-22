@@ -23,7 +23,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="reading_date" type="date">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="description" type="varchar(255)">
@@ -31,14 +31,14 @@
             </column>
 
             <column name="reading" type="double">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="temp_val" type="double">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
-            <column name="device_id" type="bigint">
+            <column name="tank_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

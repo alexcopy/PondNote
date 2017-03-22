@@ -1,6 +1,7 @@
 package ru.m2mcom.pond.service.dto;
 
 import java.time.LocalDate;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,17 +14,20 @@ public class MeterReadingDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private LocalDate readingDate;
 
     private String description;
 
+    @NotNull
     private Double reading;
 
+    @NotNull
     private Double tempVal;
 
-    private Long deviceId;
+    private Long tankId;
 
-    private String deviceDeviceName;
+    private String tankTankName;
 
     public Long getId() {
         return id;
@@ -61,20 +65,20 @@ public class MeterReadingDTO implements Serializable {
         this.tempVal = tempVal;
     }
 
-    public Long getDeviceId() {
-        return deviceId;
+    public Long getTankId() {
+        return tankId;
     }
 
-    public void setDeviceId(Long deviceId) {
-        this.deviceId = deviceId;
+    public void setTankId(Long tankId) {
+        this.tankId = tankId;
     }
 
-    public String getDeviceDeviceName() {
-        return deviceDeviceName;
+    public String getTankTankName() {
+        return tankTankName;
     }
 
-    public void setDeviceDeviceName(String deviceDeviceName) {
-        this.deviceDeviceName = deviceDeviceName;
+    public void setTankTankName(String tankTankName) {
+        this.tankTankName = tankTankName;
     }
 
     @Override

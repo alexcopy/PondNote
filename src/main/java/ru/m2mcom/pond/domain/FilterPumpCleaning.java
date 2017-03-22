@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -24,13 +25,15 @@ public class FilterPumpCleaning implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cleaning_date")
+    @NotNull
+    @Column(name = "cleaning_date", nullable = false)
     private LocalDate cleaningDate;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "temp_val")
+    @NotNull
+    @Column(name = "temp_val", nullable = false)
     private Double tempVal;
 
     @Column(name = "timestamp")

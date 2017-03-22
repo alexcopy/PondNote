@@ -18,10 +18,16 @@
             <label class="form-control-label" jhiTranslate="pondNotesApp.meterReading.readingDate" for="field_readingDate">Reading Date</label>
             <div class="input-group">
                 <input id="field_readingDate" type="text" class="form-control" name="readingDate" ngbDatepicker  #readingDateDp="ngbDatepicker" [(ngModel)]="meterReading.readingDate"
-                />
+                required/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" (click)="readingDateDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
+            </div>
+            <div [hidden]="!(editForm.controls.readingDate?.dirty && editForm.controls.readingDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.readingDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
             </div>
         </div>
         <div class="form-group">
@@ -34,20 +40,40 @@
             <label class="form-control-label" jhiTranslate="pondNotesApp.meterReading.reading" for="field_reading">Reading</label>
             <input type="number" class="form-control" name="reading" id="field_reading"
                 [(ngModel)]="meterReading.reading"
-             />
+            required />
+            <div [hidden]="!(editForm.controls.reading?.dirty && editForm.controls.reading?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.reading?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.reading?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="pondNotesApp.meterReading.tempVal" for="field_tempVal">Temp Val</label>
             <input type="number" class="form-control" name="tempVal" id="field_tempVal"
                 [(ngModel)]="meterReading.tempVal"
-             />
+            required />
+            <div [hidden]="!(editForm.controls.tempVal?.dirty && editForm.controls.tempVal?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.tempVal?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.tempVal?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
         </div>
 
         <div class="form-group">
-            <label jhiTranslate="pondNotesApp.meterReading.device" for="field_device">Device</label>
-            <select class="form-control" id="field_device" name="device" [(ngModel)]="meterReading.deviceId" >
+            <label jhiTranslate="pondNotesApp.meterReading.tank" for="field_tank">Tank</label>
+            <select class="form-control" id="field_tank" name="tank" [(ngModel)]="meterReading.tankId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="deviceOption.id" *ngFor="let deviceOption of devices; trackBy: trackDeviceById">{{deviceOption.deviceName}}</option>
+                <option [ngValue]="tankOption.id" *ngFor="let tankOption of tanks; trackBy: trackTankById">{{tankOption.tankName}}</option>
             </select>
         </div>
     </div>

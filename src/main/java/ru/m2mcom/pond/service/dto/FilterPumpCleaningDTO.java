@@ -1,6 +1,7 @@
 package ru.m2mcom.pond.service.dto;
 
 import java.time.LocalDate;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,15 +14,19 @@ public class FilterPumpCleaningDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private LocalDate cleaningDate;
 
     private String description;
 
+    @NotNull
     private Double tempVal;
 
     private Integer timestamp;
 
     private Long deviceId;
+
+    private String deviceDeviceName;
 
     public Long getId() {
         return id;
@@ -65,6 +70,14 @@ public class FilterPumpCleaningDTO implements Serializable {
 
     public void setDeviceId(Long deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public String getDeviceDeviceName() {
+        return deviceDeviceName;
+    }
+
+    public void setDeviceDeviceName(String deviceDeviceName) {
+        this.deviceDeviceName = deviceDeviceName;
     }
 
     @Override

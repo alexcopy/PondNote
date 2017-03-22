@@ -11,6 +11,12 @@
                 "filterPumpCleaningPondSuffix": "Filter Pump Cleaning",
                 "meterReadingPondSuffix": "Meter Reading",
                 "tempMeterPondSuffix": "Temp Meter",
+                "chemicalAnalysisPondSuffix": "Chemical Analysis",
+                "chemicalsPondSuffix": "Chemicals",
+                "liveStockPondSuffix": "Live Stock",
+                "otherWorksPondSuffix": "Other Works",
+                "tankPondSuffix": "Tank",
+                "waterChangePondSuffix": "Water Change",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

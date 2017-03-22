@@ -20,6 +20,12 @@
         <dd>
             <span>{{device.timestamp}}</span>
         </dd>
+        <dt><span jhiTranslate="pondNotesApp.device.tank">Tank</span></dt>
+        <dd>
+            <div *ngIf="device.tankId">
+                <a [routerLink]="['/tank-pond-suffix', device.tankId]">{{device.tankTankName}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

@@ -7,6 +7,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -24,6 +27,9 @@ public class TempMeter implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "reading_date")
+    private LocalDate readingDate;
+
     @NotNull
     @Column(name = "temp_val", nullable = false)
     private Double tempVal;
@@ -32,12 +38,32 @@ public class TempMeter implements Serializable {
     @Column(name = "timestamp", nullable = false)
     private Integer timestamp;
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "temp_meter_tank",
+               joinColumns = @JoinColumn(name="temp_meters_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="tanks_id", referencedColumnName="id"))
+    private Set<Tank> tanks = new HashSet<>();
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getReadingDate() {
+        return readingDate;
+    }
+
+    public TempMeter readingDate(LocalDate readingDate) {
+        this.readingDate = readingDate;
+        return this;
+    }
+
+    public void setReadingDate(LocalDate readingDate) {
+        this.readingDate = readingDate;
     }
 
     public Double getTempVal() {
@@ -66,6 +92,29 @@ public class TempMeter implements Serializable {
         this.timestamp = timestamp;
     }
 
+    public Set<Tank> getTanks() {
+        return tanks;
+    }
+
+    public TempMeter tanks(Set<Tank> tanks) {
+        this.tanks = tanks;
+        return this;
+    }
+
+    public TempMeter addTank(Tank tank) {
+        this.tanks.add(tank);
+        return this;
+    }
+
+    public TempMeter removeTank(Tank tank) {
+        this.tanks.remove(tank);
+        return this;
+    }
+
+    public void setTanks(Set<Tank> tanks) {
+        this.tanks = tanks;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -90,6 +139,7 @@ public class TempMeter implements Serializable {
     public String toString() {
         return "TempMeter{" +
             "id=" + id +
+            ", readingDate='" + readingDate + "'" +
             ", tempVal='" + tempVal + "'" +
             ", timestamp='" + timestamp + "'" +
             '}';

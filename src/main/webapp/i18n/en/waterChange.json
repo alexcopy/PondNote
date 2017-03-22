@@ -1,0 +1,28 @@
+{
+    "pondNotesApp": {
+        "waterChange" : {
+            "home": {
+                "title": "Water Changes",
+                "createLabel": "Create a new Water Change",
+                "createOrEditLabel": "Create or edit a Water Change",
+                "search": "Search for Water Change"
+            },
+            "created": "A new Water Change is created with identifier {{ param }}",
+            "updated": "A Water Change is updated with identifier {{ param }}",
+            "deleted": "A Water Change is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Water Change {{ id }}?"
+            },
+            "detail": {
+                "title": "Water Change"
+            },
+            "changeDate": "Change Date",
+            "description": "Description",
+            "readingBefore": "Reading Before",
+            "readingAfter": "Reading After",
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp",
+            "tank": "Tank"
+        }
+    }
+}

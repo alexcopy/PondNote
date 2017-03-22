@@ -3,15 +3,18 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "device",
-            "otherEntityName": "device",
-            "otherEntityField": "deviceName"
+            "relationshipName": "tank",
+            "otherEntityName": "tank",
+            "otherEntityField": "tankName"
         }
     ],
     "fields": [
         {
             "fieldName": "readingDate",
-            "fieldType": "LocalDate"
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "description",
@@ -19,11 +22,17 @@
         },
         {
             "fieldName": "reading",
-            "fieldType": "Double"
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "tempVal",
-            "fieldType": "Double"
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20170321172901",

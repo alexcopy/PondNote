@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
@@ -52,7 +53,7 @@ public class FilterPumpCleaningResource {
      */
     @PostMapping("/filter-pump-cleanings")
     @Timed
-    public ResponseEntity<FilterPumpCleaningDTO> createFilterPumpCleaning(@RequestBody FilterPumpCleaningDTO filterPumpCleaningDTO) throws URISyntaxException {
+    public ResponseEntity<FilterPumpCleaningDTO> createFilterPumpCleaning(@Valid @RequestBody FilterPumpCleaningDTO filterPumpCleaningDTO) throws URISyntaxException {
         log.debug("REST request to save FilterPumpCleaning : {}", filterPumpCleaningDTO);
         if (filterPumpCleaningDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new filterPumpCleaning cannot already have an ID")).body(null);
@@ -74,7 +75,7 @@ public class FilterPumpCleaningResource {
      */
     @PutMapping("/filter-pump-cleanings")
     @Timed
-    public ResponseEntity<FilterPumpCleaningDTO> updateFilterPumpCleaning(@RequestBody FilterPumpCleaningDTO filterPumpCleaningDTO) throws URISyntaxException {
+    public ResponseEntity<FilterPumpCleaningDTO> updateFilterPumpCleaning(@Valid @RequestBody FilterPumpCleaningDTO filterPumpCleaningDTO) throws URISyntaxException {
         log.debug("REST request to update FilterPumpCleaning : {}", filterPumpCleaningDTO);
         if (filterPumpCleaningDTO.getId() == null) {
             return createFilterPumpCleaning(filterPumpCleaningDTO);

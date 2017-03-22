@@ -1,7 +1,20 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "tank",
+            "otherEntityName": "tank",
+            "otherEntityField": "tankName",
+            "ownerSide": true
+        }
+    ],
     "fields": [
+        {
+            "fieldName": "readingDate",
+            "fieldType": "LocalDate"
+        },
         {
             "fieldName": "tempVal",
             "fieldType": "Double",

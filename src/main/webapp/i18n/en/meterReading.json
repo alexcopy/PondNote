@@ -20,7 +20,7 @@
             "description": "Description",
             "reading": "Reading",
             "tempVal": "Temp Val",
-            "device": "Device"
+            "tank": "Tank"
         }
     }
 }

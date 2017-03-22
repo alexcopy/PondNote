@@ -40,6 +40,9 @@ public class Device implements Serializable {
     @Column(name = "timestamp", nullable = false)
     private Integer timestamp;
 
+    @ManyToOne
+    private Tank tank;
+
     public Long getId() {
         return id;
     }
@@ -98,6 +101,19 @@ public class Device implements Serializable {
 
     public void setTimestamp(Integer timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Tank getTank() {
+        return tank;
+    }
+
+    public Device tank(Tank tank) {
+        this.tank = tank;
+        return this;
+    }
+
+    public void setTank(Tank tank) {
+        this.tank = tank;
     }
 
     @Override

@@ -1,0 +1,51 @@
+
+<div *ngIf="otherWorks">
+    <h2><span jhiTranslate="pondNotesApp.otherWorks.detail.title">Other Works</span> {{otherWorks.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.otherWorks.date">Date</span></dt>
+        <dd>
+            <span>{{otherWorks.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.otherWorks.reason">Reason</span></dt>
+        <dd>
+            <span>{{otherWorks.reason}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.otherWorks.qty">Qty</span></dt>
+        <dd>
+            <span>{{otherWorks.qty}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.otherWorks.descripton">Descripton</span></dt>
+        <dd>
+            <span>{{otherWorks.descripton}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.otherWorks.tempVal">Temp Val</span></dt>
+        <dd>
+            <span>{{otherWorks.tempVal}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.otherWorks.timestamp">Timestamp</span></dt>
+        <dd>
+            <span>{{otherWorks.timestamp}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.otherWorks.tank">Tank</span></dt>
+        <dd>
+            <div *ngIf="otherWorks.tankId">
+                <a [routerLink]="['/tank-pond-suffix', otherWorks.tankId]">{{otherWorks.tankTankName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'other-works-pond-suffix/'+ otherWorks.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,29 @@
+{
+    "pondNotesApp": {
+        "chemicalAnalysis" : {
+            "home": {
+                "title": "Chemical Analyses",
+                "createLabel": "Создать новый Chemical Analysis",
+                "createOrEditLabel": "Создать или отредактировать Chemical Analysis",
+                "search": "Найти Chemical Analysis"
+            },
+            "created": "Новый Chemical Analysis создан с идентификатором {{ param }}",
+            "updated": "Chemical Analysis обновлен с идентификатором {{ param }}",
+            "deleted": "Chemical Analysis удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Chemical Analysis {{ id }}?"
+            },
+            "detail": {
+                "title": "Chemical Analysis"
+            },
+            "date": "Date",
+            "no2": "No 2",
+            "no3": "No 3",
+            "nh4": "Nh 4",
+            "ph": "Ph",
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp",
+            "tank": "Tank"
+        }
+    }
+}

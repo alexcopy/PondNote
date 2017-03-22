@@ -67,6 +67,13 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label jhiTranslate="pondNotesApp.device.tank" for="field_tank">Tank</label>
+            <select class="form-control" id="field_tank" name="tank" [(ngModel)]="device.tankId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tankOption.id" *ngFor="let tankOption of tanks; trackBy: trackTankById">{{tankOption.tankName}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">

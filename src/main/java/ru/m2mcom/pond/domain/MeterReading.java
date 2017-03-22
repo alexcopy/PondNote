@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -24,20 +25,23 @@ public class MeterReading implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "reading_date")
+    @NotNull
+    @Column(name = "reading_date", nullable = false)
     private LocalDate readingDate;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "reading")
+    @NotNull
+    @Column(name = "reading", nullable = false)
     private Double reading;
 
-    @Column(name = "temp_val")
+    @NotNull
+    @Column(name = "temp_val", nullable = false)
     private Double tempVal;
 
     @ManyToOne
-    private Device device;
+    private Tank tank;
 
     public Long getId() {
         return id;
@@ -99,17 +103,17 @@ public class MeterReading implements Serializable {
         this.tempVal = tempVal;
     }
 
-    public Device getDevice() {
-        return device;
+    public Tank getTank() {
+        return tank;
     }
 
-    public MeterReading device(Device device) {
-        this.device = device;
+    public MeterReading tank(Tank tank) {
+        this.tank = tank;
         return this;
     }
 
-    public void setDevice(Device device) {
-        this.device = device;
+    public void setTank(Tank tank) {
+        this.tank = tank;
     }
 
     @Override

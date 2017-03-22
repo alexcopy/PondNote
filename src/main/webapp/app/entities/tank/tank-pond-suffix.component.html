@@ -1,0 +1,77 @@
+<div>
+    <h2>
+        <span jhiTranslate="pondNotesApp.tank.home.title">Tanks</span>
+        <button class="btn btn-primary float-right create-tank-pond-suffix" [routerLink]="['/', { outlets: { popup: ['tank-pond-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="pondNotesApp.tank.home.createLabel">
+            Create new Tank
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12 no-padding-right">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'pondNotesApp.tank.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="tanks">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="pondNotesApp.tank.tankName">Tank Name</span></th>
+            <th><span jhiTranslate="pondNotesApp.tank.tankType">Tank Type</span></th>
+            <th><span jhiTranslate="pondNotesApp.tank.description">Description</span></th>
+            <th><span jhiTranslate="pondNotesApp.tank.location">Location</span></th>
+            <th><span jhiTranslate="pondNotesApp.tank.timestamp">Timestamp</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tank of tanks ;trackBy: trackId">
+                <td><a [routerLink]="['../tank-pond-suffix', tank.id ]">{{tank.id}}</a></td>
+                <td>{{tank.tankName}}</td>
+                <td>{{tank.tankType}}</td>
+                <td>{{tank.description}}</td>
+                <td>{{tank.location}}</td>
+                <td>{{tank.timestamp}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../tank-pond-suffix', tank.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tank-pond-suffix/'+ tank.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tank-pond-suffix/'+ tank.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

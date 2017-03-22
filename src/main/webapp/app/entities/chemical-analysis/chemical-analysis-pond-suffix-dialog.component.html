@@ -1,0 +1,95 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myChemicalAnalysisLabel" jhiTranslate="pondNotesApp.chemicalAnalysis.home.createOrEditLabel">Create or edit a Chemical Analysis</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!chemicalAnalysis.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="chemicalAnalysis.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.date" for="field_date">Date</label>
+            <div class="input-group">
+                <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker  #dateDp="ngbDatepicker" [(ngModel)]="chemicalAnalysis.date"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.date?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.no2" for="field_no2">No 2</label>
+            <input type="text" class="form-control" name="no2" id="field_no2"
+                [(ngModel)]="chemicalAnalysis.no2"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.no3" for="field_no3">No 3</label>
+            <input type="text" class="form-control" name="no3" id="field_no3"
+                [(ngModel)]="chemicalAnalysis.no3"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.nh4" for="field_nh4">Nh 4</label>
+            <input type="text" class="form-control" name="nh4" id="field_nh4"
+                [(ngModel)]="chemicalAnalysis.nh4"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.ph" for="field_ph">Ph</label>
+            <input type="text" class="form-control" name="ph" id="field_ph"
+                [(ngModel)]="chemicalAnalysis.ph"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.tempVal" for="field_tempVal">Temp Val</label>
+            <input type="number" class="form-control" name="tempVal" id="field_tempVal"
+                [(ngModel)]="chemicalAnalysis.tempVal"
+            required />
+            <div [hidden]="!(editForm.controls.tempVal?.dirty && editForm.controls.tempVal?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.tempVal?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.tempVal?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pondNotesApp.chemicalAnalysis.timestamp" for="field_timestamp">Timestamp</label>
+            <input type="number" class="form-control" name="timestamp" id="field_timestamp"
+                [(ngModel)]="chemicalAnalysis.timestamp"
+             />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="pondNotesApp.chemicalAnalysis.tank" for="field_tank">Tank</label>
+            <select class="form-control" id="field_tank" multiple name="tank" [(ngModel)]="chemicalAnalysis.tanks">
+                <option [ngValue]="getSelected(chemicalAnalysis.tanks, tankOption)" *ngFor="let tankOption of tanks; trackBy: trackTankById">{{tankOption.tankName}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

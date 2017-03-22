@@ -1,3 +1,12 @@
+
+entity Tank {
+	tankName String required,
+    tankType String required,
+    description String,
+    location String,
+    timestamp Integer required
+}
+
 entity Device {
 	deviceName String required,
     deviceType String required,
@@ -6,30 +15,95 @@ entity Device {
 }
 
 entity TempMeter {
+    readingDate LocalDate,
 	tempVal   Double required,
     timestamp Integer required
 }
- 
+
 entity MeterReading {
-	readingDate LocalDate,
+	readingDate LocalDate required,
 	description String,
-	reading Double,
-	tempVal Double
+	reading Double required,
+	tempVal Double required
 }
- 
+
  entity FilterPumpCleaning {
-	cleaningDate LocalDate,
+	cleaningDate LocalDate required,
 	description String,
-    tempVal Double,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+ entity WaterChange {
+	changeDate LocalDate required,
+	description String,
+    readingBefore Double required,
+    readingAfter Double required,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+ entity LiveStock {
+	date LocalDate required,
+    reason StockCase,
+	description String,
+    qty Integer required,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+ entity ChemicalAnalysis {
+	date LocalDate required,
+	no2 String,
+    no3 String,
+    nh4 String,
+    ph String,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+  entity Chemicals {
+	date LocalDate required,
+	qty Integer,
+    reason String,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+  entity OtherWorks {
+	date LocalDate required,
+    reason String,
+	qty Integer,
+    descripton String,
+    tempVal Double required,
     timestamp Integer,
 }
 
 
-relationship ManyToOne {
-   FilterPumpCleaning{device} to Device,
-   MeterReading {device(deviceName)} to Device
+enum StockCase {
+    ADDED, REMOVED, DIED
 }
- 
+
+relationship ManyToOne {
+   FilterPumpCleaning{device(deviceName)} to Device,
+   MeterReading {tank(tankName)} to Tank,
+   Chemicals{tank(tankName)} to Tank,
+   OtherWorks {tank(tankName)} to Tank
+}
+
+relationship ManyToMany {
+   TempMeter{tank(tankName)} to Tank,
+   ChemicalAnalysis{tank(tankName)} to Tank
+}
+
+relationship ManyToOne {
+   Device{tank(tankName)} to Tank
+}
+relationship OneToOne {
+   WaterChange{tank(tankName)} to Tank,
+   LiveStock {tank(tankName)} to Tank
+}
+
 // Set pagination options
 paginate Device, TempMeter with infinite-scroll
 paginate MeterReading with pagination
@@ -41,4 +115,3 @@ dto * with mapstruct
 service all with serviceImpl
 // Set an angular suffix
 angularSuffix * with pondSuffix
-

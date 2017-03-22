@@ -8,7 +8,7 @@ import { EventManager, AlertService, JhiLanguageService } from 'ng-jhipster';
 import { MeterReadingPondSuffix } from './meter-reading-pond-suffix.model';
 import { MeterReadingPondSuffixPopupService } from './meter-reading-pond-suffix-popup.service';
 import { MeterReadingPondSuffixService } from './meter-reading-pond-suffix.service';
-import { DevicePondSuffix, DevicePondSuffixService } from '../device';
+import { TankPondSuffix, TankPondSuffixService } from '../tank';
 
 @Component({
     selector: 'jhi-meter-reading-pond-suffix-dialog',
@@ -20,13 +20,13 @@ export class MeterReadingPondSuffixDialogComponent implements OnInit {
     authorities: any[];
     isSaving: boolean;
 
-    devices: DevicePondSuffix[];
+    tanks: TankPondSuffix[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
         private alertService: AlertService,
         private meterReadingService: MeterReadingPondSuffixService,
-        private deviceService: DevicePondSuffixService,
+        private tankService: TankPondSuffixService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['meterReading']);
@@ -35,8 +35,8 @@ export class MeterReadingPondSuffixDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
-        this.deviceService.query().subscribe(
-            (res: Response) => { this.devices = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.tankService.query().subscribe(
+            (res: Response) => { this.tanks = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -70,7 +70,7 @@ export class MeterReadingPondSuffixDialogComponent implements OnInit {
         this.alertService.error(error.message, null, null);
     }
 
-    trackDeviceById(index: number, item: DevicePondSuffix) {
+    trackTankById(index: number, item: TankPondSuffix) {
         return item.id;
     }
 }

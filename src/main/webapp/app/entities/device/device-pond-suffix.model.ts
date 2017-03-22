@@ -5,6 +5,7 @@ export class DevicePondSuffix {
         public deviceType?: string,
         public description?: string,
         public timestamp?: number,
+        public tankId?: number,
     ) {
     }
 }

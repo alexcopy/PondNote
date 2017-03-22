@@ -162,6 +162,63 @@ public class MeterReadingResourceIntTest {
 
     @Test
     @Transactional
+    public void checkReadingDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterReadingRepository.findAll().size();
+        // set the field null
+        meterReading.setReadingDate(null);
+
+        // Create the MeterReading, which fails.
+        MeterReadingDTO meterReadingDTO = meterReadingMapper.meterReadingToMeterReadingDTO(meterReading);
+
+        restMeterReadingMockMvc.perform(post("/api/meter-readings")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterReadingDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterReading> meterReadingList = meterReadingRepository.findAll();
+        assertThat(meterReadingList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkReadingIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterReadingRepository.findAll().size();
+        // set the field null
+        meterReading.setReading(null);
+
+        // Create the MeterReading, which fails.
+        MeterReadingDTO meterReadingDTO = meterReadingMapper.meterReadingToMeterReadingDTO(meterReading);
+
+        restMeterReadingMockMvc.perform(post("/api/meter-readings")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterReadingDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterReading> meterReadingList = meterReadingRepository.findAll();
+        assertThat(meterReadingList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTempValIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterReadingRepository.findAll().size();
+        // set the field null
+        meterReading.setTempVal(null);
+
+        // Create the MeterReading, which fails.
+        MeterReadingDTO meterReadingDTO = meterReadingMapper.meterReadingToMeterReadingDTO(meterReading);
+
+        restMeterReadingMockMvc.perform(post("/api/meter-readings")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterReadingDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterReading> meterReadingList = meterReadingRepository.findAll();
+        assertThat(meterReadingList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMeterReadings() throws Exception {
         // Initialize the database
         meterReadingRepository.saveAndFlush(meterReading);

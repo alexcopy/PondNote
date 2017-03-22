@@ -34,7 +34,7 @@
             <th jhiSortBy="description"><span jhiTranslate="pondNotesApp.filterPumpCleaning.description">Description</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="tempVal"><span jhiTranslate="pondNotesApp.filterPumpCleaning.tempVal">Temp Val</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="timestamp"><span jhiTranslate="pondNotesApp.filterPumpCleaning.timestamp">Timestamp</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="deviceId"><span jhiTranslate="pondNotesApp.filterPumpCleaning.device">Device</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="deviceDeviceName"><span jhiTranslate="pondNotesApp.filterPumpCleaning.device">Device</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -47,7 +47,7 @@
                 <td>{{filterPumpCleaning.timestamp}}</td>
                 <td>
                     <div *ngIf="filterPumpCleaning.deviceId">
-                        <a [routerLink]="['../device-pond-suffix', filterPumpCleaning.deviceId  ]" >{{filterPumpCleaning.deviceId}}</a>
+                        <a [routerLink]="['../device-pond-suffix', filterPumpCleaning.deviceId  ]" >{{filterPumpCleaning.deviceDeviceName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

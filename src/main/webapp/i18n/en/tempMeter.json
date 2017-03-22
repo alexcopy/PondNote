@@ -16,8 +16,10 @@
             "detail": {
                 "title": "Temp Meter"
             },
+            "readingDate": "Reading Date",
             "tempVal": "Temp Val",
-            "timestamp": "Timestamp"
+            "timestamp": "Timestamp",
+            "tank": "Tank"
         }
     }
 }

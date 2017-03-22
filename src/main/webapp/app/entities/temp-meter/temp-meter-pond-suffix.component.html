@@ -30,6 +30,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="readingDate"><span jhiTranslate="pondNotesApp.tempMeter.readingDate">Reading Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="tempVal"><span jhiTranslate="pondNotesApp.tempMeter.tempVal">Temp Val</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="timestamp"><span jhiTranslate="pondNotesApp.tempMeter.timestamp">Timestamp</span> <span class="fa fa-sort"></span></th>
             <th></th>
@@ -38,6 +39,7 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let tempMeter of tempMeters ;trackBy: trackId">
                 <td><a [routerLink]="['../temp-meter-pond-suffix', tempMeter.id ]">{{tempMeter.id}}</a></td>
+                <td>{{tempMeter.readingDate | date:'mediumDate'}}</td>
                 <td>{{tempMeter.tempVal}}</td>
                 <td>{{tempMeter.timestamp}}</td>
                 <td class="text-right">

@@ -9,16 +9,16 @@ import java.util.List;
 /**
  * Mapper for the entity MeterReading and its DTO MeterReadingDTO.
  */
-@Mapper(componentModel = "spring", uses = {DeviceMapper.class, })
+@Mapper(componentModel = "spring", uses = {TankMapper.class, })
 public interface MeterReadingMapper {
 
-    @Mapping(source = "device.id", target = "deviceId")
-    @Mapping(source = "device.deviceName", target = "deviceDeviceName")
+    @Mapping(source = "tank.id", target = "tankId")
+    @Mapping(source = "tank.tankName", target = "tankTankName")
     MeterReadingDTO meterReadingToMeterReadingDTO(MeterReading meterReading);
 
     List<MeterReadingDTO> meterReadingsToMeterReadingDTOs(List<MeterReading> meterReadings);
 
-    @Mapping(source = "deviceId", target = "device")
+    @Mapping(source = "tankId", target = "tank")
     MeterReading meterReadingDTOToMeterReading(MeterReadingDTO meterReadingDTO);
 
     List<MeterReading> meterReadingDTOsToMeterReadings(List<MeterReadingDTO> meterReadingDTOs);

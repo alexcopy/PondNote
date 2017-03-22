@@ -1,0 +1,373 @@
+package ru.m2mcom.pond.web.rest;
+
+import ru.m2mcom.pond.PondNotesApp;
+
+import ru.m2mcom.pond.domain.ChemicalAnalysis;
+import ru.m2mcom.pond.repository.ChemicalAnalysisRepository;
+import ru.m2mcom.pond.service.ChemicalAnalysisService;
+import ru.m2mcom.pond.repository.search.ChemicalAnalysisSearchRepository;
+import ru.m2mcom.pond.service.dto.ChemicalAnalysisDTO;
+import ru.m2mcom.pond.service.mapper.ChemicalAnalysisMapper;
+import ru.m2mcom.pond.web.rest.errors.ExceptionTranslator;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+/**
+ * Test class for the ChemicalAnalysisResource REST controller.
+ *
+ * @see ChemicalAnalysisResource
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = PondNotesApp.class)
+public class ChemicalAnalysisResourceIntTest {
+
+    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final String DEFAULT_NO_2 = "AAAAAAAAAA";
+    private static final String UPDATED_NO_2 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NO_3 = "AAAAAAAAAA";
+    private static final String UPDATED_NO_3 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NH_4 = "AAAAAAAAAA";
+    private static final String UPDATED_NH_4 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PH = "AAAAAAAAAA";
+    private static final String UPDATED_PH = "BBBBBBBBBB";
+
+    private static final Double DEFAULT_TEMP_VAL = 1D;
+    private static final Double UPDATED_TEMP_VAL = 2D;
+
+    private static final Integer DEFAULT_TIMESTAMP = 1;
+    private static final Integer UPDATED_TIMESTAMP = 2;
+
+    @Autowired
+    private ChemicalAnalysisRepository chemicalAnalysisRepository;
+
+    @Autowired
+    private ChemicalAnalysisMapper chemicalAnalysisMapper;
+
+    @Autowired
+    private ChemicalAnalysisService chemicalAnalysisService;
+
+    @Autowired
+    private ChemicalAnalysisSearchRepository chemicalAnalysisSearchRepository;
+
+    @Autowired
+    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
+
+    @Autowired
+    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
+
+    @Autowired
+    private ExceptionTranslator exceptionTranslator;
+
+    @Autowired
+    private EntityManager em;
+
+    private MockMvc restChemicalAnalysisMockMvc;
+
+    private ChemicalAnalysis chemicalAnalysis;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        ChemicalAnalysisResource chemicalAnalysisResource = new ChemicalAnalysisResource(chemicalAnalysisService);
+        this.restChemicalAnalysisMockMvc = MockMvcBuilders.standaloneSetup(chemicalAnalysisResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setMessageConverters(jacksonMessageConverter).build();
+    }
+
+    /**
+     * Create an entity for this test.
+     *
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static ChemicalAnalysis createEntity(EntityManager em) {
+        ChemicalAnalysis chemicalAnalysis = new ChemicalAnalysis()
+            .date(DEFAULT_DATE)
+            .no2(DEFAULT_NO_2)
+            .no3(DEFAULT_NO_3)
+            .nh4(DEFAULT_NH_4)
+            .ph(DEFAULT_PH)
+            .tempVal(DEFAULT_TEMP_VAL)
+            .timestamp(DEFAULT_TIMESTAMP);
+        return chemicalAnalysis;
+    }
+
+    @Before
+    public void initTest() {
+        chemicalAnalysisSearchRepository.deleteAll();
+        chemicalAnalysis = createEntity(em);
+    }
+
+    @Test
+    @Transactional
+    public void createChemicalAnalysis() throws Exception {
+        int databaseSizeBeforeCreate = chemicalAnalysisRepository.findAll().size();
+
+        // Create the ChemicalAnalysis
+        ChemicalAnalysisDTO chemicalAnalysisDTO = chemicalAnalysisMapper.chemicalAnalysisToChemicalAnalysisDTO(chemicalAnalysis);
+        restChemicalAnalysisMockMvc.perform(post("/api/chemical-analyses")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(chemicalAnalysisDTO)))
+            .andExpect(status().isCreated());
+
+        // Validate the ChemicalAnalysis in the database
+        List<ChemicalAnalysis> chemicalAnalysisList = chemicalAnalysisRepository.findAll();
+        assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeCreate + 1);
+        ChemicalAnalysis testChemicalAnalysis = chemicalAnalysisList.get(chemicalAnalysisList.size() - 1);
+        assertThat(testChemicalAnalysis.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testChemicalAnalysis.getNo2()).isEqualTo(DEFAULT_NO_2);
+        assertThat(testChemicalAnalysis.getNo3()).isEqualTo(DEFAULT_NO_3);
+        assertThat(testChemicalAnalysis.getNh4()).isEqualTo(DEFAULT_NH_4);
+        assertThat(testChemicalAnalysis.getPh()).isEqualTo(DEFAULT_PH);
+        assertThat(testChemicalAnalysis.getTempVal()).isEqualTo(DEFAULT_TEMP_VAL);
+        assertThat(testChemicalAnalysis.getTimestamp()).isEqualTo(DEFAULT_TIMESTAMP);
+
+        // Validate the ChemicalAnalysis in Elasticsearch
+        ChemicalAnalysis chemicalAnalysisEs = chemicalAnalysisSearchRepository.findOne(testChemicalAnalysis.getId());
+        assertThat(chemicalAnalysisEs).isEqualToComparingFieldByField(testChemicalAnalysis);
+    }
+
+    @Test
+    @Transactional
+    public void createChemicalAnalysisWithExistingId() throws Exception {
+        int databaseSizeBeforeCreate = chemicalAnalysisRepository.findAll().size();
+
+        // Create the ChemicalAnalysis with an existing ID
+        chemicalAnalysis.setId(1L);
+        ChemicalAnalysisDTO chemicalAnalysisDTO = chemicalAnalysisMapper.chemicalAnalysisToChemicalAnalysisDTO(chemicalAnalysis);
+
+        // An entity with an existing ID cannot be created, so this API call must fail
+        restChemicalAnalysisMockMvc.perform(post("/api/chemical-analyses")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(chemicalAnalysisDTO)))
+            .andExpect(status().isBadRequest());
+
+        // Validate the Alice in the database
+        List<ChemicalAnalysis> chemicalAnalysisList = chemicalAnalysisRepository.findAll();
+        assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = chemicalAnalysisRepository.findAll().size();
+        // set the field null
+        chemicalAnalysis.setDate(null);
+
+        // Create the ChemicalAnalysis, which fails.
+        ChemicalAnalysisDTO chemicalAnalysisDTO = chemicalAnalysisMapper.chemicalAnalysisToChemicalAnalysisDTO(chemicalAnalysis);
+
+        restChemicalAnalysisMockMvc.perform(post("/api/chemical-analyses")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(chemicalAnalysisDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ChemicalAnalysis> chemicalAnalysisList = chemicalAnalysisRepository.findAll();
+        assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTempValIsRequired() throws Exception {
+        int databaseSizeBeforeTest = chemicalAnalysisRepository.findAll().size();
+        // set the field null
+        chemicalAnalysis.setTempVal(null);
+
+        // Create the ChemicalAnalysis, which fails.
+        ChemicalAnalysisDTO chemicalAnalysisDTO = chemicalAnalysisMapper.chemicalAnalysisToChemicalAnalysisDTO(chemicalAnalysis);
+
+        restChemicalAnalysisMockMvc.perform(post("/api/chemical-analyses")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(chemicalAnalysisDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ChemicalAnalysis> chemicalAnalysisList = chemicalAnalysisRepository.findAll();
+        assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void getAllChemicalAnalyses() throws Exception {
+        // Initialize the database
+        chemicalAnalysisRepository.saveAndFlush(chemicalAnalysis);
+
+        // Get all the chemicalAnalysisList
+        restChemicalAnalysisMockMvc.perform(get("/api/chemical-analyses?sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(chemicalAnalysis.getId().intValue())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].no2").value(hasItem(DEFAULT_NO_2.toString())))
+            .andExpect(jsonPath("$.[*].no3").value(hasItem(DEFAULT_NO_3.toString())))
+            .andExpect(jsonPath("$.[*].nh4").value(hasItem(DEFAULT_NH_4.toString())))
+            .andExpect(jsonPath("$.[*].ph").value(hasItem(DEFAULT_PH.toString())))
+            .andExpect(jsonPath("$.[*].tempVal").value(hasItem(DEFAULT_TEMP_VAL.doubleValue())))
+            .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));
+    }
+
+    @Test
+    @Transactional
+    public void getChemicalAnalysis() throws Exception {
+        // Initialize the database
+        chemicalAnalysisRepository.saveAndFlush(chemicalAnalysis);
+
+        // Get the chemicalAnalysis
+        restChemicalAnalysisMockMvc.perform(get("/api/chemical-analyses/{id}", chemicalAnalysis.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.id").value(chemicalAnalysis.getId().intValue()))
+            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
+            .andExpect(jsonPath("$.no2").value(DEFAULT_NO_2.toString()))
+            .andExpect(jsonPath("$.no3").value(DEFAULT_NO_3.toString()))
+            .andExpect(jsonPath("$.nh4").value(DEFAULT_NH_4.toString()))
+            .andExpect(jsonPath("$.ph").value(DEFAULT_PH.toString()))
+            .andExpect(jsonPath("$.tempVal").value(DEFAULT_TEMP_VAL.doubleValue()))
+            .andExpect(jsonPath("$.timestamp").value(DEFAULT_TIMESTAMP));
+    }
+
+    @Test
+    @Transactional
+    public void getNonExistingChemicalAnalysis() throws Exception {
+        // Get the chemicalAnalysis
+        restChemicalAnalysisMockMvc.perform(get("/api/chemical-analyses/{id}", Long.MAX_VALUE))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Transactional
+    public void updateChemicalAnalysis() throws Exception {
+        // Initialize the database
+        chemicalAnalysisRepository.saveAndFlush(chemicalAnalysis);
+        chemicalAnalysisSearchRepository.save(chemicalAnalysis);
+        int databaseSizeBeforeUpdate = chemicalAnalysisRepository.findAll().size();
+
+        // Update the chemicalAnalysis
+        ChemicalAnalysis updatedChemicalAnalysis = chemicalAnalysisRepository.findOne(chemicalAnalysis.getId());
+        updatedChemicalAnalysis
+            .date(UPDATED_DATE)
+            .no2(UPDATED_NO_2)
+            .no3(UPDATED_NO_3)
+            .nh4(UPDATED_NH_4)
+            .ph(UPDATED_PH)
+            .tempVal(UPDATED_TEMP_VAL)
+            .timestamp(UPDATED_TIMESTAMP);
+        ChemicalAnalysisDTO chemicalAnalysisDTO = chemicalAnalysisMapper.chemicalAnalysisToChemicalAnalysisDTO(updatedChemicalAnalysis);
+
+        restChemicalAnalysisMockMvc.perform(put("/api/chemical-analyses")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(chemicalAnalysisDTO)))
+            .andExpect(status().isOk());
+
+        // Validate the ChemicalAnalysis in the database
+        List<ChemicalAnalysis> chemicalAnalysisList = chemicalAnalysisRepository.findAll();
+        assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeUpdate);
+        ChemicalAnalysis testChemicalAnalysis = chemicalAnalysisList.get(chemicalAnalysisList.size() - 1);
+        assertThat(testChemicalAnalysis.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testChemicalAnalysis.getNo2()).isEqualTo(UPDATED_NO_2);
+        assertThat(testChemicalAnalysis.getNo3()).isEqualTo(UPDATED_NO_3);
+        assertThat(testChemicalAnalysis.getNh4()).isEqualTo(UPDATED_NH_4);
+        assertThat(testChemicalAnalysis.getPh()).isEqualTo(UPDATED_PH);
+        assertThat(testChemicalAnalysis.getTempVal()).isEqualTo(UPDATED_TEMP_VAL);
+        assertThat(testChemicalAnalysis.getTimestamp()).isEqualTo(UPDATED_TIMESTAMP);
+
+        // Validate the ChemicalAnalysis in Elasticsearch
+        ChemicalAnalysis chemicalAnalysisEs = chemicalAnalysisSearchRepository.findOne(testChemicalAnalysis.getId());
+        assertThat(chemicalAnalysisEs).isEqualToComparingFieldByField(testChemicalAnalysis);
+    }
+
+    @Test
+    @Transactional
+    public void updateNonExistingChemicalAnalysis() throws Exception {
+        int databaseSizeBeforeUpdate = chemicalAnalysisRepository.findAll().size();
+
+        // Create the ChemicalAnalysis
+        ChemicalAnalysisDTO chemicalAnalysisDTO = chemicalAnalysisMapper.chemicalAnalysisToChemicalAnalysisDTO(chemicalAnalysis);
+
+        // If the entity doesn't have an ID, it will be created instead of just being updated
+        restChemicalAnalysisMockMvc.perform(put("/api/chemical-analyses")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(chemicalAnalysisDTO)))
+            .andExpect(status().isCreated());
+
+        // Validate the ChemicalAnalysis in the database
+        List<ChemicalAnalysis> chemicalAnalysisList = chemicalAnalysisRepository.findAll();
+        assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeUpdate + 1);
+    }
+
+    @Test
+    @Transactional
+    public void deleteChemicalAnalysis() throws Exception {
+        // Initialize the database
+        chemicalAnalysisRepository.saveAndFlush(chemicalAnalysis);
+        chemicalAnalysisSearchRepository.save(chemicalAnalysis);
+        int databaseSizeBeforeDelete = chemicalAnalysisRepository.findAll().size();
+
+        // Get the chemicalAnalysis
+        restChemicalAnalysisMockMvc.perform(delete("/api/chemical-analyses/{id}", chemicalAnalysis.getId())
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
+
+        // Validate Elasticsearch is empty
+        boolean chemicalAnalysisExistsInEs = chemicalAnalysisSearchRepository.exists(chemicalAnalysis.getId());
+        assertThat(chemicalAnalysisExistsInEs).isFalse();
+
+        // Validate the database is empty
+        List<ChemicalAnalysis> chemicalAnalysisList = chemicalAnalysisRepository.findAll();
+        assertThat(chemicalAnalysisList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    public void searchChemicalAnalysis() throws Exception {
+        // Initialize the database
+        chemicalAnalysisRepository.saveAndFlush(chemicalAnalysis);
+        chemicalAnalysisSearchRepository.save(chemicalAnalysis);
+
+        // Search the chemicalAnalysis
+        restChemicalAnalysisMockMvc.perform(get("/api/_search/chemical-analyses?query=id:" + chemicalAnalysis.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(chemicalAnalysis.getId().intValue())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].no2").value(hasItem(DEFAULT_NO_2.toString())))
+            .andExpect(jsonPath("$.[*].no3").value(hasItem(DEFAULT_NO_3.toString())))
+            .andExpect(jsonPath("$.[*].nh4").value(hasItem(DEFAULT_NH_4.toString())))
+            .andExpect(jsonPath("$.[*].ph").value(hasItem(DEFAULT_PH.toString())))
+            .andExpect(jsonPath("$.[*].tempVal").value(hasItem(DEFAULT_TEMP_VAL.doubleValue())))
+            .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));
+    }
+
+    @Test
+    @Transactional
+    public void equalsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ChemicalAnalysis.class);
+    }
+}

@@ -13,6 +13,7 @@ import java.util.List;
 public interface FilterPumpCleaningMapper {
 
     @Mapping(source = "device.id", target = "deviceId")
+    @Mapping(source = "device.deviceName", target = "deviceDeviceName")
     FilterPumpCleaningDTO filterPumpCleaningToFilterPumpCleaningDTO(FilterPumpCleaning filterPumpCleaning);
 
     List<FilterPumpCleaningDTO> filterPumpCleaningsToFilterPumpCleaningDTOs(List<FilterPumpCleaning> filterPumpCleanings);

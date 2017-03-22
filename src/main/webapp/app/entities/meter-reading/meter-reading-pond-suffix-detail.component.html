@@ -20,10 +20,10 @@
         <dd>
             <span>{{meterReading.tempVal}}</span>
         </dd>
-        <dt><span jhiTranslate="pondNotesApp.meterReading.device">Device</span></dt>
+        <dt><span jhiTranslate="pondNotesApp.meterReading.tank">Tank</span></dt>
         <dd>
-            <div *ngIf="meterReading.deviceId">
-                <a [routerLink]="['/device-pond-suffix', meterReading.deviceId]">{{meterReading.deviceDeviceName}}</a>
+            <div *ngIf="meterReading.tankId">
+                <a [routerLink]="['/tank-pond-suffix', meterReading.tankId]">{{meterReading.tankTankName}}</a>
             </div>
         </dd>
     </dl>

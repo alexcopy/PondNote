@@ -1,0 +1,55 @@
+
+<div *ngIf="chemicalAnalysis">
+    <h2><span jhiTranslate="pondNotesApp.chemicalAnalysis.detail.title">Chemical Analysis</span> {{chemicalAnalysis.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.chemicalAnalysis.date">Date</span></dt>
+        <dd>
+            <span>{{chemicalAnalysis.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicalAnalysis.no2">No 2</span></dt>
+        <dd>
+            <span>{{chemicalAnalysis.no2}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicalAnalysis.no3">No 3</span></dt>
+        <dd>
+            <span>{{chemicalAnalysis.no3}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicalAnalysis.nh4">Nh 4</span></dt>
+        <dd>
+            <span>{{chemicalAnalysis.nh4}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicalAnalysis.ph">Ph</span></dt>
+        <dd>
+            <span>{{chemicalAnalysis.ph}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicalAnalysis.tempVal">Temp Val</span></dt>
+        <dd>
+            <span>{{chemicalAnalysis.tempVal}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicalAnalysis.timestamp">Timestamp</span></dt>
+        <dd>
+            <span>{{chemicalAnalysis.timestamp}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicalAnalysis.tank">Tank</span></dt>
+        <dd>
+            <span *ngFor="let tank of chemicalAnalysis.tanks; let last = last">
+                <a [routerLink]="['/tank-pond-suffix', tank?.id ]">{{tank.tankName}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'chemical-analysis-pond-suffix/'+ chemicalAnalysis.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

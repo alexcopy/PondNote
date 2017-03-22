@@ -1,0 +1,51 @@
+
+<div *ngIf="liveStock">
+    <h2><span jhiTranslate="pondNotesApp.liveStock.detail.title">Live Stock</span> {{liveStock.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.liveStock.date">Date</span></dt>
+        <dd>
+            <span>{{liveStock.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.liveStock.reason">Reason</span></dt>
+        <dd>
+            <span jhiTranslate="{{'pondNotesApp.StockCase.' + liveStock.reason}}">{{liveStock.reason}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.liveStock.description">Description</span></dt>
+        <dd>
+            <span>{{liveStock.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.liveStock.qty">Qty</span></dt>
+        <dd>
+            <span>{{liveStock.qty}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.liveStock.tempVal">Temp Val</span></dt>
+        <dd>
+            <span>{{liveStock.tempVal}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.liveStock.timestamp">Timestamp</span></dt>
+        <dd>
+            <span>{{liveStock.timestamp}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.liveStock.tank">Tank</span></dt>
+        <dd>
+            <div *ngIf="liveStock.tankId">
+                <a [routerLink]="['/tank-pond-suffix', liveStock.tankId]">{{liveStock.tankTankName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'live-stock-pond-suffix/'+ liveStock.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

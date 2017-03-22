@@ -8,6 +8,7 @@ import { EventManager, AlertService, JhiLanguageService } from 'ng-jhipster';
 import { TempMeterPondSuffix } from './temp-meter-pond-suffix.model';
 import { TempMeterPondSuffixPopupService } from './temp-meter-pond-suffix-popup.service';
 import { TempMeterPondSuffixService } from './temp-meter-pond-suffix.service';
+import { TankPondSuffix, TankPondSuffixService } from '../tank';
 
 @Component({
     selector: 'jhi-temp-meter-pond-suffix-dialog',
@@ -18,11 +19,14 @@ export class TempMeterPondSuffixDialogComponent implements OnInit {
     tempMeter: TempMeterPondSuffix;
     authorities: any[];
     isSaving: boolean;
+
+    tanks: TankPondSuffix[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
         private alertService: AlertService,
         private tempMeterService: TempMeterPondSuffixService,
+        private tankService: TankPondSuffixService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['tempMeter']);
@@ -31,6 +35,8 @@ export class TempMeterPondSuffixDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
+        this.tankService.query().subscribe(
+            (res: Response) => { this.tanks = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -62,6 +68,21 @@ export class TempMeterPondSuffixDialogComponent implements OnInit {
 
     private onError (error) {
         this.alertService.error(error.message, null, null);
+    }
+
+    trackTankById(index: number, item: TankPondSuffix) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

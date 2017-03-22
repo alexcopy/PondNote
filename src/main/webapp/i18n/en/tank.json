@@ -1,0 +1,26 @@
+{
+    "pondNotesApp": {
+        "tank" : {
+            "home": {
+                "title": "Tanks",
+                "createLabel": "Create a new Tank",
+                "createOrEditLabel": "Create or edit a Tank",
+                "search": "Search for Tank"
+            },
+            "created": "A new Tank is created with identifier {{ param }}",
+            "updated": "A Tank is updated with identifier {{ param }}",
+            "deleted": "A Tank is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tank {{ id }}?"
+            },
+            "detail": {
+                "title": "Tank"
+            },
+            "tankName": "Tank Name",
+            "tankType": "Tank Type",
+            "description": "Description",
+            "location": "Location",
+            "timestamp": "Timestamp"
+        }
+    }
+}

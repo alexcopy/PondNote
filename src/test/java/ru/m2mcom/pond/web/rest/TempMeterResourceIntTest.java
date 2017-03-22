@@ -25,6 +25,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,6 +42,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PondNotesApp.class)
 public class TempMeterResourceIntTest {
+
+    private static final LocalDate DEFAULT_READING_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_READING_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Double DEFAULT_TEMP_VAL = 1D;
     private static final Double UPDATED_TEMP_VAL = 2D;
@@ -93,6 +98,7 @@ public class TempMeterResourceIntTest {
      */
     public static TempMeter createEntity(EntityManager em) {
         TempMeter tempMeter = new TempMeter()
+            .readingDate(DEFAULT_READING_DATE)
             .tempVal(DEFAULT_TEMP_VAL)
             .timestamp(DEFAULT_TIMESTAMP);
         return tempMeter;
@@ -120,6 +126,7 @@ public class TempMeterResourceIntTest {
         List<TempMeter> tempMeterList = tempMeterRepository.findAll();
         assertThat(tempMeterList).hasSize(databaseSizeBeforeCreate + 1);
         TempMeter testTempMeter = tempMeterList.get(tempMeterList.size() - 1);
+        assertThat(testTempMeter.getReadingDate()).isEqualTo(DEFAULT_READING_DATE);
         assertThat(testTempMeter.getTempVal()).isEqualTo(DEFAULT_TEMP_VAL);
         assertThat(testTempMeter.getTimestamp()).isEqualTo(DEFAULT_TIMESTAMP);
 
@@ -197,6 +204,7 @@ public class TempMeterResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tempMeter.getId().intValue())))
+            .andExpect(jsonPath("$.[*].readingDate").value(hasItem(DEFAULT_READING_DATE.toString())))
             .andExpect(jsonPath("$.[*].tempVal").value(hasItem(DEFAULT_TEMP_VAL.doubleValue())))
             .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));
     }
@@ -212,6 +220,7 @@ public class TempMeterResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(tempMeter.getId().intValue()))
+            .andExpect(jsonPath("$.readingDate").value(DEFAULT_READING_DATE.toString()))
             .andExpect(jsonPath("$.tempVal").value(DEFAULT_TEMP_VAL.doubleValue()))
             .andExpect(jsonPath("$.timestamp").value(DEFAULT_TIMESTAMP));
     }
@@ -235,6 +244,7 @@ public class TempMeterResourceIntTest {
         // Update the tempMeter
         TempMeter updatedTempMeter = tempMeterRepository.findOne(tempMeter.getId());
         updatedTempMeter
+            .readingDate(UPDATED_READING_DATE)
             .tempVal(UPDATED_TEMP_VAL)
             .timestamp(UPDATED_TIMESTAMP);
         TempMeterDTO tempMeterDTO = tempMeterMapper.tempMeterToTempMeterDTO(updatedTempMeter);
@@ -248,6 +258,7 @@ public class TempMeterResourceIntTest {
         List<TempMeter> tempMeterList = tempMeterRepository.findAll();
         assertThat(tempMeterList).hasSize(databaseSizeBeforeUpdate);
         TempMeter testTempMeter = tempMeterList.get(tempMeterList.size() - 1);
+        assertThat(testTempMeter.getReadingDate()).isEqualTo(UPDATED_READING_DATE);
         assertThat(testTempMeter.getTempVal()).isEqualTo(UPDATED_TEMP_VAL);
         assertThat(testTempMeter.getTimestamp()).isEqualTo(UPDATED_TIMESTAMP);
 
@@ -309,6 +320,7 @@ public class TempMeterResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tempMeter.getId().intValue())))
+            .andExpect(jsonPath("$.[*].readingDate").value(hasItem(DEFAULT_READING_DATE.toString())))
             .andExpect(jsonPath("$.[*].tempVal").value(hasItem(DEFAULT_TEMP_VAL.doubleValue())))
             .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP)));
     }

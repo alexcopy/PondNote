@@ -3,6 +3,8 @@ package ru.m2mcom.pond.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -23,6 +25,10 @@ public class DeviceDTO implements Serializable {
 
     @NotNull
     private Integer timestamp;
+
+    private Long tankId;
+
+    private String tankTankName;
 
     public Long getId() {
         return id;
@@ -58,6 +64,22 @@ public class DeviceDTO implements Serializable {
 
     public void setTimestamp(Integer timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Long getTankId() {
+        return tankId;
+    }
+
+    public void setTankId(Long tankId) {
+        this.tankId = tankId;
+    }
+
+    public String getTankTankName() {
+        return tankTankName;
+    }
+
+    public void setTankTankName(String tankTankName) {
+        this.tankTankName = tankTankName;
     }
 
     @Override

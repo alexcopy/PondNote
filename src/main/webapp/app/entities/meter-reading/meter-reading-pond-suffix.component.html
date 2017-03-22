@@ -34,7 +34,7 @@
             <th jhiSortBy="description"><span jhiTranslate="pondNotesApp.meterReading.description">Description</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="reading"><span jhiTranslate="pondNotesApp.meterReading.reading">Reading</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="tempVal"><span jhiTranslate="pondNotesApp.meterReading.tempVal">Temp Val</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="deviceDeviceName"><span jhiTranslate="pondNotesApp.meterReading.device">Device</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tankTankName"><span jhiTranslate="pondNotesApp.meterReading.tank">Tank</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -46,8 +46,8 @@
                 <td>{{meterReading.reading}}</td>
                 <td>{{meterReading.tempVal}}</td>
                 <td>
-                    <div *ngIf="meterReading.deviceId">
-                        <a [routerLink]="['../device-pond-suffix', meterReading.deviceId  ]" >{{meterReading.deviceDeviceName}}</a>
+                    <div *ngIf="meterReading.tankId">
+                        <a [routerLink]="['../tank-pond-suffix', meterReading.tankId  ]" >{{meterReading.tankTankName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

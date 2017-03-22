@@ -23,7 +23,7 @@
         <dt><span jhiTranslate="pondNotesApp.filterPumpCleaning.device">Device</span></dt>
         <dd>
             <div *ngIf="filterPumpCleaning.deviceId">
-                <a [routerLink]="['/device-pond-suffix', filterPumpCleaning.deviceId]">{{filterPumpCleaning.deviceId}}</a>
+                <a [routerLink]="['/device-pond-suffix', filterPumpCleaning.deviceId]">{{filterPumpCleaning.deviceDeviceName}}</a>
             </div>
         </dd>
     </dl>

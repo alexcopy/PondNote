@@ -1,0 +1,28 @@
+{
+    "pondNotesApp": {
+        "otherWorks" : {
+            "home": {
+                "title": "Other Works",
+                "createLabel": "Создать новый Other Works",
+                "createOrEditLabel": "Создать или отредактировать Other Works",
+                "search": "Найти Other Works"
+            },
+            "created": "Новый Other Works создан с идентификатором {{ param }}",
+            "updated": "Other Works обновлен с идентификатором {{ param }}",
+            "deleted": "Other Works удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Other Works {{ id }}?"
+            },
+            "detail": {
+                "title": "Other Works"
+            },
+            "date": "Date",
+            "reason": "Reason",
+            "qty": "Qty",
+            "descripton": "Descripton",
+            "tempVal": "Temp Val",
+            "timestamp": "Timestamp",
+            "tank": "Tank"
+        }
+    }
+}

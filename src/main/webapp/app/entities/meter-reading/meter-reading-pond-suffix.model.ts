@@ -5,7 +5,7 @@ export class MeterReadingPondSuffix {
         public description?: string,
         public reading?: number,
         public tempVal?: number,
-        public deviceId?: number,
+        public tankId?: number,
     ) {
     }
 }

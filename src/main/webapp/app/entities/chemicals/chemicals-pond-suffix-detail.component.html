@@ -1,0 +1,47 @@
+
+<div *ngIf="chemicals">
+    <h2><span jhiTranslate="pondNotesApp.chemicals.detail.title">Chemicals</span> {{chemicals.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pondNotesApp.chemicals.date">Date</span></dt>
+        <dd>
+            <span>{{chemicals.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicals.qty">Qty</span></dt>
+        <dd>
+            <span>{{chemicals.qty}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicals.reason">Reason</span></dt>
+        <dd>
+            <span>{{chemicals.reason}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicals.tempVal">Temp Val</span></dt>
+        <dd>
+            <span>{{chemicals.tempVal}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicals.timestamp">Timestamp</span></dt>
+        <dd>
+            <span>{{chemicals.timestamp}}</span>
+        </dd>
+        <dt><span jhiTranslate="pondNotesApp.chemicals.tank">Tank</span></dt>
+        <dd>
+            <div *ngIf="chemicals.tankId">
+                <a [routerLink]="['/tank-pond-suffix', chemicals.tankId]">{{chemicals.tankTankName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'chemicals-pond-suffix/'+ chemicals.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

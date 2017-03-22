@@ -19,7 +19,8 @@
             "deviceName": "Device Name",
             "deviceType": "Device Type",
             "description": "Description",
-            "timestamp": "Timestamp"
+            "timestamp": "Timestamp",
+            "tank": "Tank"
         }
     }
 }

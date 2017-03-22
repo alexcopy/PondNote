@@ -8,6 +8,7 @@ import { EventManager, AlertService, JhiLanguageService } from 'ng-jhipster';
 import { DevicePondSuffix } from './device-pond-suffix.model';
 import { DevicePondSuffixPopupService } from './device-pond-suffix-popup.service';
 import { DevicePondSuffixService } from './device-pond-suffix.service';
+import { TankPondSuffix, TankPondSuffixService } from '../tank';
 
 @Component({
     selector: 'jhi-device-pond-suffix-dialog',
@@ -18,11 +19,14 @@ export class DevicePondSuffixDialogComponent implements OnInit {
     device: DevicePondSuffix;
     authorities: any[];
     isSaving: boolean;
+
+    tanks: TankPondSuffix[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
         private alertService: AlertService,
         private deviceService: DevicePondSuffixService,
+        private tankService: TankPondSuffixService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['device']);
@@ -31,6 +35,8 @@ export class DevicePondSuffixDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
+        this.tankService.query().subscribe(
+            (res: Response) => { this.tanks = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -62,6 +68,10 @@ export class DevicePondSuffixDialogComponent implements OnInit {
 
     private onError (error) {
         this.alertService.error(error.message, null, null);
+    }
+
+    trackTankById(index: number, item: TankPondSuffix) {
+        return item.id;
     }
 }
 

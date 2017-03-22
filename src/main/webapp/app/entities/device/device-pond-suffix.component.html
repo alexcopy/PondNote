@@ -34,6 +34,7 @@
             <th jhiSortBy="deviceType"><span jhiTranslate="pondNotesApp.device.deviceType">Device Type</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="description"><span jhiTranslate="pondNotesApp.device.description">Description</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="timestamp"><span jhiTranslate="pondNotesApp.device.timestamp">Timestamp</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tankTankName"><span jhiTranslate="pondNotesApp.device.tank">Tank</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -44,6 +45,11 @@
                 <td>{{device.deviceType}}</td>
                 <td>{{device.description}}</td>
                 <td>{{device.timestamp}}</td>
+                <td>
+                    <div *ngIf="device.tankId">
+                        <a [routerLink]="['../tank-pond-suffix', device.tankId  ]" >{{device.tankTankName}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
