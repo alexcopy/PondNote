@@ -20,7 +20,7 @@ public interface ChemicalAnalysisService {
 
     /**
      *  Get all the chemicalAnalyses.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -45,7 +45,7 @@ public interface ChemicalAnalysisService {
      * Search for the chemicalAnalysis corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */

@@ -28,7 +28,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class DeviceServiceImpl implements DeviceService{
 
     private final Logger log = LoggerFactory.getLogger(DeviceServiceImpl.class);
-    
+
     private final DeviceRepository deviceRepository;
 
     private final DeviceMapper deviceMapper;
@@ -59,7 +59,7 @@ public class DeviceServiceImpl implements DeviceService{
 
     /**
      *  Get all the devices.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -110,6 +110,14 @@ public class DeviceServiceImpl implements DeviceService{
     public Page<DeviceDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Devices for query {}", query);
         Page<Device> result = deviceSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(device -> deviceMapper.deviceToDeviceDTO(device));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<DeviceDTO> findByUserIsCurrentUser(  Pageable pageable) {
+        log.debug("Request to get all Devices");
+        Page<Device> result = deviceRepository.findByUserIsCurrentUser(pageable);
         return result.map(device -> deviceMapper.deviceToDeviceDTO(device));
     }
 }

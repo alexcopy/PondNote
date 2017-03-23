@@ -28,7 +28,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ChemicalAnalysisServiceImpl implements ChemicalAnalysisService{
 
     private final Logger log = LoggerFactory.getLogger(ChemicalAnalysisServiceImpl.class);
-    
+
     private final ChemicalAnalysisRepository chemicalAnalysisRepository;
 
     private final ChemicalAnalysisMapper chemicalAnalysisMapper;
@@ -59,7 +59,7 @@ public class ChemicalAnalysisServiceImpl implements ChemicalAnalysisService{
 
     /**
      *  Get all the chemicalAnalyses.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
