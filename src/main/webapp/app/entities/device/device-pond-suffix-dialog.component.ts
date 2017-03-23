@@ -9,6 +9,7 @@ import { DevicePondSuffix } from './device-pond-suffix.model';
 import { DevicePondSuffixPopupService } from './device-pond-suffix-popup.service';
 import { DevicePondSuffixService } from './device-pond-suffix.service';
 import { TankPondSuffix, TankPondSuffixService } from '../tank';
+import { User, UserService } from '../../shared';
 
 @Component({
     selector: 'jhi-device-pond-suffix-dialog',
@@ -21,12 +22,15 @@ export class DevicePondSuffixDialogComponent implements OnInit {
     isSaving: boolean;
 
     tanks: TankPondSuffix[];
+
+    users: User[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
         private alertService: AlertService,
         private deviceService: DevicePondSuffixService,
         private tankService: TankPondSuffixService,
+        private userService: UserService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['device', 'deviceType']);
@@ -37,6 +41,8 @@ export class DevicePondSuffixDialogComponent implements OnInit {
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         this.tankService.query().subscribe(
             (res: Response) => { this.tanks = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.userService.query().subscribe(
+            (res: Response) => { this.users = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -71,6 +77,10 @@ export class DevicePondSuffixDialogComponent implements OnInit {
     }
 
     trackTankById(index: number, item: TankPondSuffix) {
+        return item.id;
+    }
+
+    trackUserById(index: number, item: User) {
         return item.id;
     }
 }

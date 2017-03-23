@@ -20,7 +20,8 @@
             "deviceType": "Device Type",
             "description": "Description",
             "timestamp": "Timestamp",
-            "tank": "Tank"
+            "tank": "Tank",
+            "user": "User"
         }
     }
 }

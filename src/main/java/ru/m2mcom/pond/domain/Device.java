@@ -46,6 +46,9 @@ public class Device implements Serializable {
     @ManyToOne
     private Tank tank;
 
+    @ManyToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -117,6 +120,19 @@ public class Device implements Serializable {
 
     public void setTank(Tank tank) {
         this.tank = tank;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Device user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

@@ -20,7 +20,8 @@
             "tankType": "Tank Type",
             "description": "Description",
             "timestamp": "Timestamp",
-            "location": "Location"
+            "location": "Location",
+            "user": "User"
         }
     }
 }

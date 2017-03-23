@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tank"/>
 
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="device"
+                                 constraintName="fk_device_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

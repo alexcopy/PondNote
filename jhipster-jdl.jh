@@ -1,4 +1,3 @@
-
 entity Location {
 	streetAddress String,
 	postalCode String,
@@ -111,7 +110,9 @@ relationship ManyToMany {
 }
 
 relationship ManyToOne {
-   Device{tank(tankName)} to Tank
+   Device{tank(tankName)} to Tank,
+   Device{user(firstName)} to User,
+   Tank{user(firstName)} to User
 }
 relationship OneToOne {
    WaterChange{tank(tankName)} to Tank,

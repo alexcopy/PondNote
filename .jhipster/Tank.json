@@ -8,6 +8,12 @@
             "otherEntityField": "streetAddress",
             "ownerSide": true,
             "otherEntityRelationshipName": "tank"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "firstName"
         }
     ],
     "fields": [

@@ -26,6 +26,10 @@
                 <a [routerLink]="['/tank-pond-suffix', device.tankId]">{{device.tankTankName}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="pondNotesApp.device.user">User</span></dt>
+        <dd>
+            {{device.userFirstName}}
+        </dd>
     </dl>
 
     <button type="submit"

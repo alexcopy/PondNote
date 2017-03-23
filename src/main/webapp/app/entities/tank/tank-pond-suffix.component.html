@@ -35,6 +35,7 @@
             <th><span jhiTranslate="pondNotesApp.tank.description">Description</span></th>
             <th><span jhiTranslate="pondNotesApp.tank.timestamp">Timestamp</span></th>
             <th><span jhiTranslate="pondNotesApp.tank.location">Location</span></th>
+            <th><span jhiTranslate="pondNotesApp.tank.user">User</span></th>
             <th></th>
             </tr>
             </thead>
@@ -49,6 +50,9 @@
                     <div *ngIf="tank.locationId">
                         <a [routerLink]="['../location-pond-suffix', tank.locationId  ]" >{{tank.locationStreetAddress}}</a>
                     </div>
+                </td>
+                <td>
+                    {{tank.userFirstName}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

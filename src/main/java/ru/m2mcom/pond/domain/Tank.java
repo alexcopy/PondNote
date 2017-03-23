@@ -46,6 +46,9 @@ public class Tank implements Serializable {
     @JoinColumn(unique = true)
     private Location location;
 
+    @ManyToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -117,6 +120,19 @@ public class Tank implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Tank user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

@@ -31,6 +31,10 @@ public class DeviceDTO implements Serializable {
 
     private String tankTankName;
 
+    private Long userId;
+
+    private String userFirstName;
+
     public Long getId() {
         return id;
     }
@@ -81,6 +85,22 @@ public class DeviceDTO implements Serializable {
 
     public void setTankTankName(String tankTankName) {
         this.tankTankName = tankTankName;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserFirstName() {
+        return userFirstName;
+    }
+
+    public void setUserFirstName(String userFirstName) {
+        this.userFirstName = userFirstName;
     }
 
     @Override

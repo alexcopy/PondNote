@@ -12,4 +12,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface TankRepository extends JpaRepository<Tank,Long> {
 
+    @Query("select tank from Tank tank where tank.user.login = ?#{principal.username}")
+    List<Tank> findByUserIsCurrentUser();
+
 }

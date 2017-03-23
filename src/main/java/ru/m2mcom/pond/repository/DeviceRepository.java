@@ -12,4 +12,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface DeviceRepository extends JpaRepository<Device,Long> {
 
+    @Query("select device from Device device where device.user.login = ?#{principal.username}")
+    List<Device> findByUserIsCurrentUser();
+
 }
