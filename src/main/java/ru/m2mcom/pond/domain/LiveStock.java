@@ -49,8 +49,7 @@ public class LiveStock implements Serializable {
     @Column(name = "timestamp")
     private Integer timestamp;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Tank tank;
 
     public Long getId() {

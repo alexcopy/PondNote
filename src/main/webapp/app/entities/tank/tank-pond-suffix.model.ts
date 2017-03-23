@@ -12,7 +12,6 @@ export class TankPondSuffix {
         public description?: string,
         public timestamp?: number,
         public locationId?: number,
-        public userId?: number,
     ) {
     }
 }

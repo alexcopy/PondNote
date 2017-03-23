@@ -113,8 +113,7 @@ relationship ManyToMany {
 
 relationship ManyToOne {
    Device{tank(tankName)} to Tank,
-   Device{user(firstName)} to User,
-   Tank{user(firstName)} to User
+   Device{user(firstName)} to User
 }
 relationship ManyToOne {
    WaterChange{tank(tankName)} to Tank,

@@ -1,7 +1,5 @@
 package ru.m2mcom.pond.repository;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import ru.m2mcom.pond.domain.ChemicalAnalysis;
 
 import org.springframework.data.jpa.repository.*;

@@ -35,15 +35,8 @@ export class WaterChangePondSuffixDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
-        this.tankService.query({filter: 'waterchange-is-null'}).subscribe((res: Response) => {
-            if (!this.waterChange.tankId) {
-                this.tanks = res.json();
-            } else {
-                this.tankService.find(this.waterChange.tankId).subscribe((subRes: TankPondSuffix) => {
-                    this.tanks = [subRes].concat(res.json());
-                }, (subRes: Response) => this.onError(subRes.json()));
-            }
-        }, (res: Response) => this.onError(res.json()));
+        this.tankService.query().subscribe(
+            (res: Response) => { this.tanks = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');

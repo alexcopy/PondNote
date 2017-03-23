@@ -31,7 +31,7 @@ public class TankResource {
     private final Logger log = LoggerFactory.getLogger(TankResource.class);
 
     private static final String ENTITY_NAME = "tank";
-
+        
     private final TankService tankService;
 
     public TankResource(TankService tankService) {
@@ -89,7 +89,7 @@ public class TankResource {
     @Timed
     public List<TankDTO> getAllTanks() {
         log.debug("REST request to get all Tanks");
-        return tankService.findByUserIsCurrentUser();
+        return tankService.findAll();
     }
 
     /**
@@ -124,7 +124,7 @@ public class TankResource {
      * SEARCH  /_search/tanks?query=:query : search for the tank corresponding
      * to the query.
      *
-     * @param query the query of the tank search
+     * @param query the query of the tank search 
      * @return the result of the search
      */
     @GetMapping("/_search/tanks")

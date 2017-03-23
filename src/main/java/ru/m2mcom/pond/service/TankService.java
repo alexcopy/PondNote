@@ -18,7 +18,7 @@ public interface TankService {
 
     /**
      *  Get all the tanks.
-     *
+     *  
      *  @return the list of entities
      */
     List<TankDTO> findAll();
@@ -42,10 +42,8 @@ public interface TankService {
      * Search for the tank corresponding to the query.
      *
      *  @param query the query of the search
-     *
+     *  
      *  @return the list of entities
      */
     List<TankDTO> search(String query);
-
-    List<TankDTO> findByUserIsCurrentUser();
 }

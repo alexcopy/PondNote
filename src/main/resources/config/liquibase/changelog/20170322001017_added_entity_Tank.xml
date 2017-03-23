@@ -37,10 +37,8 @@
             <column name="timestamp" type="integer">
                 <constraints nullable="false" />
             </column>
+
             <column name="location_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>
-            <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

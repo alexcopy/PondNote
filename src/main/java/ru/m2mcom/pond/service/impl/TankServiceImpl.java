@@ -26,7 +26,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class TankServiceImpl implements TankService{
 
     private final Logger log = LoggerFactory.getLogger(TankServiceImpl.class);
-
+    
     private final TankRepository tankRepository;
 
     private final TankMapper tankMapper;
@@ -57,7 +57,7 @@ public class TankServiceImpl implements TankService{
 
     /**
      *  Get all the tanks.
-     *
+     *  
      *  @return the list of entities
      */
     @Override
@@ -112,16 +112,5 @@ public class TankServiceImpl implements TankService{
             .stream(tankSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(tankMapper::tankToTankDTO)
             .collect(Collectors.toList());
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<TankDTO> findByUserIsCurrentUser() {
-        log.debug("Request to get all Tanks by User");
-        List<TankDTO> result = tankRepository.findByUserIsCurrentUser().stream()
-            .map(tankMapper::tankToTankDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-
-        return result;
     }
 }

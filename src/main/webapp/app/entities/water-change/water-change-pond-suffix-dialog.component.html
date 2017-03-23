@@ -94,7 +94,7 @@
 
         <div class="form-group">
             <label jhiTranslate="pondNotesApp.waterChange.tank" for="field_tank">Tank</label>
-            <select class="form-control" id="field_tank" name="tank" [(ngModel)]="waterChange.tankId">
+            <select class="form-control" id="field_tank" name="tank" [(ngModel)]="waterChange.tankId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="tankOption.id" *ngFor="let tankOption of tanks; trackBy: trackTankById">{{tankOption.tankName}}</option>
             </select>

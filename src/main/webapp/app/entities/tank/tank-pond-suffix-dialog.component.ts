@@ -9,7 +9,6 @@ import { TankPondSuffix } from './tank-pond-suffix.model';
 import { TankPondSuffixPopupService } from './tank-pond-suffix-popup.service';
 import { TankPondSuffixService } from './tank-pond-suffix.service';
 import { LocationPondSuffix, LocationPondSuffixService } from '../location';
-import { User, UserService } from '../../shared';
 
 @Component({
     selector: 'jhi-tank-pond-suffix-dialog',
@@ -22,15 +21,12 @@ export class TankPondSuffixDialogComponent implements OnInit {
     isSaving: boolean;
 
     locations: LocationPondSuffix[];
-
-    users: User[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
         private alertService: AlertService,
         private tankService: TankPondSuffixService,
         private locationService: LocationPondSuffixService,
-        private userService: UserService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['tank', 'tankType']);
@@ -39,17 +35,8 @@ export class TankPondSuffixDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
-        this.locationService.query({filter: 'tank-is-null'}).subscribe((res: Response) => {
-            if (!this.tank.locationId) {
-                this.locations = res.json();
-            } else {
-                this.locationService.find(this.tank.locationId).subscribe((subRes: LocationPondSuffix) => {
-                    this.locations = [subRes].concat(res.json());
-                }, (subRes: Response) => this.onError(subRes.json()));
-            }
-        }, (res: Response) => this.onError(res.json()));
-        this.userService.query().subscribe(
-            (res: Response) => { this.users = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.locationService.query().subscribe(
+            (res: Response) => { this.locations = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -84,10 +71,6 @@ export class TankPondSuffixDialogComponent implements OnInit {
     }
 
     trackLocationById(index: number, item: LocationPondSuffix) {
-        return item.id;
-    }
-
-    trackUserById(index: number, item: User) {
         return item.id;
     }
 }

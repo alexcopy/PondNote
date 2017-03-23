@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { PondNotesSharedModule } from '../../shared';
-import { PondNotesAdminModule } from '../../admin/admin.module';
 
 import {
     TankPondSuffixService,
@@ -25,7 +24,6 @@ let ENTITY_STATES = [
 @NgModule({
     imports: [
         PondNotesSharedModule,
-        PondNotesAdminModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [

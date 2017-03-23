@@ -45,9 +45,11 @@
             <column name="timestamp" type="integer">
                 <constraints nullable="true" />
             </column>
+
             <column name="tank_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="live_stock" columnName="date" columnDataType="datetime"/>
