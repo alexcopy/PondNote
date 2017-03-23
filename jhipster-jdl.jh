@@ -1,3 +1,5 @@
+
+
 entity Location {
 	streetAddress String,
 	postalCode String,
@@ -114,7 +116,7 @@ relationship ManyToOne {
    Device{user(firstName)} to User,
    Tank{user(firstName)} to User
 }
-relationship OneToOne {
+relationship ManyToOne {
    WaterChange{tank(tankName)} to Tank,
    LiveStock {tank(tankName)} to Tank,
    Tank{location(streetAddress)} to Location
