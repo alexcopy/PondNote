@@ -78,7 +78,7 @@ To ensure everything worked, run:
 
     java -jar target/*.war
 
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
+Then navigate to [http://localhost:8085](http://localhost:8085) in your browser.
 
 
 ## Testing
