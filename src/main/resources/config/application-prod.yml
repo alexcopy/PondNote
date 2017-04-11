@@ -21,7 +21,7 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mariadb://localhost:3306/PondNotes
+        url: jdbc:mariadb://localhost:3306/PondNotes?useUnicode=true&characterEncoding=utf8
         username: root
         password:
         hikari:
