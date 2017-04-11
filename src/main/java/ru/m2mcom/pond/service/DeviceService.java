@@ -20,7 +20,7 @@ public interface DeviceService {
 
     /**
      *  Get all the devices.
-     *
+     *  
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -45,11 +45,9 @@ public interface DeviceService {
      * Search for the device corresponding to the query.
      *
      *  @param query the query of the search
-     *
+     *  
      *  @param pageable the pagination information
      *  @return the list of entities
      */
     Page<DeviceDTO> search(String query, Pageable pageable);
-
-    Page<DeviceDTO> findByUserIsCurrentUser(Pageable pageable);
 }

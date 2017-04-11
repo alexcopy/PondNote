@@ -37,7 +37,7 @@ public class DeviceResource {
     private final Logger log = LoggerFactory.getLogger(DeviceResource.class);
 
     private static final String ENTITY_NAME = "device";
-
+        
     private final DeviceService deviceService;
 
     public DeviceResource(DeviceService deviceService) {
@@ -96,7 +96,7 @@ public class DeviceResource {
     @Timed
     public ResponseEntity<List<DeviceDTO>> getAllDevices(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Devices");
-        Page<DeviceDTO> page = deviceService.findByUserIsCurrentUser(pageable);
+        Page<DeviceDTO> page = deviceService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/devices");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -133,7 +133,7 @@ public class DeviceResource {
      * SEARCH  /_search/devices?query=:query : search for the device corresponding
      * to the query.
      *
-     * @param query the query of the device search
+     * @param query the query of the device search 
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -141,7 +141,7 @@ public class DeviceResource {
     @Timed
     public ResponseEntity<List<DeviceDTO>> searchDevices(@RequestParam String query, @ApiParam Pageable pageable) {
         log.debug("REST request to search for a page of Devices for query {}", query);
-        Page<DeviceDTO> page = deviceService.findByUserIsCurrentUser(pageable);
+        Page<DeviceDTO> page = deviceService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/devices");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
